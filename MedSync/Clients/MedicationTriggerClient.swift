@@ -51,6 +51,18 @@ enum MedicationTriggerPlanner {
 }
 
 #if canImport(HealthKit)
+private final class ObserverQueryCompletionHandlerBox: @unchecked Sendable {
+    private let completionHandler: () -> Void
+
+    init(_ completionHandler: @escaping () -> Void) {
+        self.completionHandler = completionHandler
+    }
+
+    func call() {
+        completionHandler()
+    }
+}
+
 private actor MedicationTriggerService {
     private let healthStore = HKHealthStore()
     private var observerQuery: HKObserverQuery?
@@ -127,9 +139,10 @@ private actor MedicationTriggerService {
             sampleType: .medicationDoseEventType(),
             predicate: nil
         ) { [weak self] _, completionHandler, error in
-            completionHandler()
+            let completion = ObserverQueryCompletionHandlerBox(completionHandler)
             Task {
                 await self?.handleObservation(error: error)
+                completion.call()
             }
         }
 
