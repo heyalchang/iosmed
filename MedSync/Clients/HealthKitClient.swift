@@ -192,6 +192,7 @@ private actor HealthKitMedicationService {
 
         let concept = matchingMedication?.medication
         return MedicationIdentity(
+            conceptIdentifier: mapConceptIdentifier(event.medicationConceptIdentifier),
             displayText: concept?.displayText ?? "Medication",
             nickname: matchingMedication?.nickname,
             hasSchedule: matchingMedication?.hasSchedule ?? (event.scheduleType == .schedule),
@@ -200,6 +201,16 @@ private actor HealthKitMedicationService {
             codings: (concept?.relatedCodings ?? []).sorted { $0.code < $1.code }.map {
                 MedicationCoding(system: $0.system, version: $0.version, code: $0.code)
             }
+        )
+    }
+
+    private func mapConceptIdentifier(_ identifier: HKHealthConceptIdentifier) -> MedicationConceptIdentifier {
+        MedicationConceptIdentifier(
+            domain: identifier.domain.rawValue,
+            archivedValue: try? NSKeyedArchiver.archivedData(
+                withRootObject: identifier,
+                requiringSecureCoding: true
+            ).base64EncodedString()
         )
     }
 
