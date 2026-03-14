@@ -33,6 +33,20 @@ struct AutomationDetailView: View {
             LabeledContent("Time Grouping", value: store.automation.exportOptions.timeGrouping.displayName)
             LabeledContent("Destination", value: ExportFileLayout.destinationDescription)
 
+            if let nextEligibleRun = store.nextEligibleRun {
+                LabeledContent(
+                    "Next Eligible Run",
+                    value: nextEligibleRun.formatted(date: .abbreviated, time: .shortened)
+                )
+            }
+
+            if let lastScheduledAttempt = store.lastScheduledAttempt {
+                LabeledContent(
+                    "Last Scheduled Attempt",
+                    value: lastScheduledAttempt.formatted(date: .abbreviated, time: .shortened)
+                )
+            }
+
             if store.automation.trigger.scheduledCadence != nil {
                 Text("Scheduled automations are requested as best effort background runs. iOS decides the actual execution time.")
                     .font(.footnote)

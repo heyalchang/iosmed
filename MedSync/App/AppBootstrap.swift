@@ -7,5 +7,6 @@ enum AppBootstrap {
         let automations = (try? await AutomationStoreClient.liveValue.load()) ?? []
         await MedicationTriggerClient.liveValue.syncAutomationSelection(automations)
         await AutomationSchedulerClient.liveValue.syncAutomations(automations)
+        await AutomationSchedulerClient.liveValue.refreshDueAutomations()
     }
 }

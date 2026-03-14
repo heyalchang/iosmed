@@ -17,6 +17,7 @@
 		2C5AEB67C3541862389A571C /* AutomationSchedulePlannerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09D6AA0D742B8C403CED462 /* AutomationSchedulePlannerTests.swift */; };
 		2CAD07D074930C0BD5C8488D /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D87CA7403DE267D1F85FC9 /* SettingsView.swift */; };
 		2D61B3B2F6B6847ED57DCFAB /* ActivityLogStoreClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4E7171DDE7F0A7B5EB4755 /* ActivityLogStoreClient.swift */; };
+		305631222B720F555D3649EF /* SettingsFeatureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBBFF1AB54E4C22B107C75A8 /* SettingsFeatureTests.swift */; };
 		49975513EE62AE5374D3E172 /* UserFacingError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9087BF2AA5517D8ED2FF5AB8 /* UserFacingError.swift */; };
 		569919BE55976ED226F2A6CF /* Automation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5908D0F52A724051B6D8E764 /* Automation.swift */; };
 		579B80910F83D6839C9D8D4B /* AutomationRuntimeState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E716F95461AAABDBD29208 /* AutomationRuntimeState.swift */; };
@@ -60,6 +61,7 @@
 		E71E4FE7D23A427CF3F9E09A /* AutomationsFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B627D04DED6D1C3439C8DA0 /* AutomationsFeature.swift */; };
 		E77FD70B45B7225CD174A7F4 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = F084CA91D44D547B3BA35056 /* ComposableArchitecture */; };
 		E82658225253D1245D59534D /* CasePaths in Frameworks */ = {isa = PBXBuildFile; productRef = 8AEC99A7099A49325709D459 /* CasePaths */; };
+		E8F61029A764860A1F4D216B /* AutomationDetailFeatureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242976BA3CD13499A3B263E6 /* AutomationDetailFeatureTests.swift */; };
 		F5AFA7D2DBA16C7613D7E96B /* Perception in Frameworks */ = {isa = PBXBuildFile; productRef = A56F5461A7D873013A7D02F0 /* Perception */; };
 		F7760D3EB19DCCAB477A1896 /* ExportFileLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509057FB957C6FBB513EE910 /* ExportFileLayout.swift */; };
 		F9F97F7AA8FCCFB3B8BBFC18 /* ManualExportFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01289CCA298570804EEFD91C /* ManualExportFeature.swift */; };
@@ -94,6 +96,7 @@
 		0FFB1F25C0BF44BBF40B8883 /* ActivityLogFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityLogFeature.swift; sourceTree = "<group>"; };
 		10A8E54658B78490253EA071 /* HealthKitClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitClient.swift; sourceTree = "<group>"; };
 		1DF1294E09979AC20E8E405D /* RunAutomationIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunAutomationIntent.swift; sourceTree = "<group>"; };
+		242976BA3CD13499A3B263E6 /* AutomationDetailFeatureTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutomationDetailFeatureTests.swift; sourceTree = "<group>"; };
 		25AA8C4934BEF2A72F7AD0E0 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2935990E96D4069817033E2D /* AppRuntime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRuntime.swift; sourceTree = "<group>"; };
 		2B627D04DED6D1C3439C8DA0 /* AutomationsFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutomationsFeature.swift; sourceTree = "<group>"; };
@@ -124,6 +127,7 @@
 		BB6EEF58FCECAA179ACE7D2C /* ExportRunnerClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportRunnerClient.swift; sourceTree = "<group>"; };
 		C09D6AA0D742B8C403CED462 /* AutomationSchedulePlannerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutomationSchedulePlannerTests.swift; sourceTree = "<group>"; };
 		CB4E7171DDE7F0A7B5EB4755 /* ActivityLogStoreClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityLogStoreClient.swift; sourceTree = "<group>"; };
+		CBBFF1AB54E4C22B107C75A8 /* SettingsFeatureTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsFeatureTests.swift; sourceTree = "<group>"; };
 		D0F3A0788810C70DDCE39FB0 /* LocalNotificationClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationClient.swift; sourceTree = "<group>"; };
 		D41698DBFD98A46A58DA26F8 /* AutomationSchedulerClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutomationSchedulerClient.swift; sourceTree = "<group>"; };
 		DEF91AEECACE846ED83375CA /* MedSyncTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = MedSyncTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -305,8 +309,10 @@
 		7D7CA627E569268503C4BCED /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				242976BA3CD13499A3B263E6 /* AutomationDetailFeatureTests.swift */,
 				9CFFBA11C93D28490F8E3079 /* AutomationsFeatureTests.swift */,
 				E7E0C31CE4D57360C1FF67A5 /* ManualExportFeatureTests.swift */,
+				CBBFF1AB54E4C22B107C75A8 /* SettingsFeatureTests.swift */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -513,12 +519,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E8F61029A764860A1F4D216B /* AutomationDetailFeatureTests.swift in Sources */,
 				2C5AEB67C3541862389A571C /* AutomationSchedulePlannerTests.swift in Sources */,
 				AC3C888C9053AC9C62D2E62F /* AutomationsFeatureTests.swift in Sources */,
 				93435669C3C8E3C2A378A598 /* ExportFileLayoutTests.swift in Sources */,
 				B251A506CB5F1B116577BB52 /* ManualExportFeatureTests.swift in Sources */,
 				E00A81E92A691589F5DEA586 /* MedicationExportSerializationTests.swift in Sources */,
 				FD267BFC9954B7CD972669E6 /* MedicationTriggerPlannerTests.swift in Sources */,
+				305631222B720F555D3649EF /* SettingsFeatureTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

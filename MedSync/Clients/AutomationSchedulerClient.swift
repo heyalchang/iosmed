@@ -13,6 +13,7 @@ enum AutomationSchedulerConfiguration {
 
 struct AutomationSchedulerClient: Sendable {
     var syncAutomations: @Sendable ([Automation]) async -> Void
+    var refreshDueAutomations: @Sendable () async -> Void
     var handleAppRefresh: @Sendable () async -> Void
 }
 
@@ -23,6 +24,9 @@ extension AutomationSchedulerClient: DependencyKey {
             syncAutomations: { automations in
                 await service.syncAutomations(automations)
             },
+            refreshDueAutomations: {
+                await service.refreshDueAutomations()
+            },
             handleAppRefresh: {
                 await service.handleAppRefresh()
             }
@@ -31,6 +35,7 @@ extension AutomationSchedulerClient: DependencyKey {
 
     static let testValue = Self(
         syncAutomations: { _ in },
+        refreshDueAutomations: { },
         handleAppRefresh: { }
     )
 }
@@ -62,6 +67,10 @@ private actor AutomationSchedulerService {
     }
 
     func handleAppRefresh() async {
+        await refreshDueAutomations()
+    }
+
+    func refreshDueAutomations() async {
         let automationStore = AutomationStoreClient.liveValue
         let runtimeStore = AutomationRuntimeStoreClient.liveValue
 

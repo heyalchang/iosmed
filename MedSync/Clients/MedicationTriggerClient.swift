@@ -70,19 +70,7 @@ private actor MedicationTriggerService {
             return
         }
 
-        observerQuery = HKObserverQuery(
-            sampleType: .medicationDoseEventType(),
-            predicate: nil
-        ) { [weak self] _, completionHandler, error in
-            completionHandler()
-            Task {
-                await self?.handleObservation(error: error)
-            }
-        }
-
-        if let observerQuery {
-            healthStore.execute(observerQuery)
-        }
+        installObserverQuery(reinstall: false)
 
         await requestProcessing()
     }
@@ -93,7 +81,14 @@ private actor MedicationTriggerService {
             .trigger
             .medicationFrequency
 
-        try? await HealthKitClient.liveValue.configureMedicationBackgroundDelivery(frequency)
+        let configured = (try? await HealthKitClient.liveValue.configureMedicationBackgroundDelivery(frequency)) != nil
+
+        guard hasStarted, frequency != nil, configured else {
+            return
+        }
+
+        installObserverQuery(reinstall: true)
+        await requestProcessing()
     }
 
     private func handleObservation(error: Error?) async {
@@ -116,6 +111,31 @@ private actor MedicationTriggerService {
             try? await processObservedChanges()
             isProcessingChanges = false
         } while needsProcessingChanges
+    }
+
+    private func installObserverQuery(reinstall: Bool) {
+        if reinstall, let observerQuery {
+            healthStore.stop(observerQuery)
+            self.observerQuery = nil
+        }
+
+        guard observerQuery == nil else {
+            return
+        }
+
+        observerQuery = HKObserverQuery(
+            sampleType: .medicationDoseEventType(),
+            predicate: nil
+        ) { [weak self] _, completionHandler, error in
+            completionHandler()
+            Task {
+                await self?.handleObservation(error: error)
+            }
+        }
+
+        if let observerQuery {
+            healthStore.execute(observerQuery)
+        }
     }
 
     private func processObservedChanges() async throws {
