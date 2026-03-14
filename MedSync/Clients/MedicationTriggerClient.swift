@@ -55,10 +55,12 @@ private actor MedicationTriggerService {
     private let healthStore = HKHealthStore()
     private var observerQuery: HKObserverQuery?
     private var hasStarted = false
+    private var isProcessingChanges = false
+    private var needsProcessingChanges = false
 
     func start() async {
         guard !hasStarted else {
-            try? await processObservedChanges()
+            await requestProcessing()
             return
         }
 
@@ -82,7 +84,7 @@ private actor MedicationTriggerService {
             healthStore.execute(observerQuery)
         }
 
-        try? await processObservedChanges()
+        await requestProcessing()
     }
 
     func syncAutomationSelection(_ automations: [Automation]) async {
@@ -99,7 +101,21 @@ private actor MedicationTriggerService {
             return
         }
 
-        try? await processObservedChanges()
+        await requestProcessing()
+    }
+
+    private func requestProcessing() async {
+        if isProcessingChanges {
+            needsProcessingChanges = true
+            return
+        }
+
+        repeat {
+            needsProcessingChanges = false
+            isProcessingChanges = true
+            try? await processObservedChanges()
+            isProcessingChanges = false
+        } while needsProcessingChanges
     }
 
     private func processObservedChanges() async throws {

@@ -3,6 +3,9 @@ import Foundation
 #if canImport(BackgroundTasks)
 import BackgroundTasks
 #endif
+#if canImport(os)
+import os
+#endif
 
 enum AutomationSchedulerConfiguration {
     static let refreshTaskIdentifier = "com.placeholder.MedSync.automation-refresh"
@@ -40,6 +43,10 @@ extension DependencyValues {
 }
 
 private actor AutomationSchedulerService {
+    #if canImport(os)
+    private let logger = Logger(subsystem: "com.placeholder.MedSync", category: "AutomationScheduler")
+    #endif
+
     func syncAutomations(_ automations: [Automation]) async {
         let runtimeStore = AutomationRuntimeStoreClient.liveValue
         let runtimeState = try? await runtimeStore.update { state in
@@ -73,12 +80,12 @@ private actor AutomationSchedulerService {
                 .scheduledBackground,
                 nil
             )
+            _ = try? await runtimeStore.update { state in
+                state.recordScheduledAttempt(for: automation.id, at: Date())
+            }
         }
 
         _ = try? await runtimeStore.update { state in
-            for automation in dueAutomations {
-                state.recordScheduledAttempt(for: automation.id, at: now)
-            }
             let validAutomationIDs = Set(automations.map(\.id))
             let staleIDs = Set(state.scheduledRuns.map(\.automationID)).subtracting(validAutomationIDs)
             state.removeState(for: staleIDs)
@@ -101,7 +108,13 @@ private actor AutomationSchedulerService {
 
         let request = BGAppRefreshTaskRequest(identifier: AutomationSchedulerConfiguration.refreshTaskIdentifier)
         request.earliestBeginDate = max(nextRefreshDate, Date())
-        try? BGTaskScheduler.shared.submit(request)
+        do {
+            try BGTaskScheduler.shared.submit(request)
+        } catch {
+            #if canImport(os)
+            logger.error("Failed to submit background refresh request: \(error.localizedDescription)")
+            #endif
+        }
         #endif
     }
 }
