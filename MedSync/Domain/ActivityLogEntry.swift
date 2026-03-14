@@ -65,7 +65,13 @@ struct ActivityLogEntry: Identifiable, Codable, Equatable, Sendable {
 }
 
 extension ActivityLogEntry {
-    static func run(summary: ExportRunSummary, status: ActivityStatus = .success, errorDetails: String? = nil, timestamp: Date) -> Self {
+    static func run(
+        summary: ExportRunSummary,
+        status: ActivityStatus = .success,
+        errorDetails: String? = nil,
+        timestamp: Date,
+        message: String? = nil
+    ) -> Self {
         ActivityLogEntry(
             eventType: summary.triggerReason == .manualExport ? .manualExport : .automationRun,
             automationID: summary.automationID,
@@ -80,7 +86,7 @@ extension ActivityLogEntry {
             destination: summary.destination,
             filename: summary.filename,
             errorDetails: errorDetails,
-            message: status == .success ? "Export completed" : "Export failed"
+            message: message ?? defaultRunMessage(triggerReason: summary.triggerReason, status: status)
         )
     }
 
@@ -101,5 +107,31 @@ extension ActivityLogEntry {
             message: action
         )
     }
-}
 
+    private static func defaultRunMessage(triggerReason: TriggerReason, status: ActivityStatus) -> String {
+        let suffix: String
+        switch status {
+        case .success:
+            suffix = "completed"
+        case .failure:
+            suffix = "failed"
+        case .info:
+            suffix = "updated"
+        }
+
+        switch triggerReason {
+        case .manualExport:
+            return "Manual export \(suffix)"
+        case .runNow:
+            return "Run Now export \(suffix)"
+        case .runAll:
+            return "Run All export \(suffix)"
+        case .scheduledBackground:
+            return "Scheduled export \(suffix)"
+        case .shortcuts:
+            return "Shortcuts export \(suffix)"
+        case .medicationTriggerBackgroundDelivery:
+            return "Medication-triggered export \(suffix)"
+        }
+    }
+}

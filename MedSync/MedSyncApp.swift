@@ -7,10 +7,20 @@ struct MedSyncApp: App {
         AppFeature()
     }
 
+    init() {
+        if !AppRuntime.isRunningTests {
+            Task {
+                await AppBootstrap.run()
+            }
+        }
+    }
+
     var body: some Scene {
         WindowGroup {
             AppView(store: store)
         }
+        .backgroundTask(.appRefresh(AutomationSchedulerConfiguration.refreshTaskIdentifier)) {
+            await AutomationSchedulerClient.liveValue.handleAppRefresh()
+        }
     }
 }
-

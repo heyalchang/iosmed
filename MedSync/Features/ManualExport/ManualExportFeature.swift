@@ -20,9 +20,7 @@ struct ManualExportFeature {
         case exportResponse(Result<ExportRunSummary, UserFacingError>)
     }
 
-    @Dependency(\.exportRunner) var exportRunner
-    @Dependency(\.activityLogStore) var activityLogStore
-    @Dependency(\.date.now) var now
+    @Dependency(\.automationExecution) var automationExecution
 
     var body: some ReducerOf<Self> {
         Reduce { state, action in
@@ -51,33 +49,11 @@ struct ManualExportFeature {
                 state.isExporting = true
                 state.resultMessage = nil
                 let exportOptions = state.exportOptions
-                return .run { [now] send in
+                return .run { send in
                     do {
-                        let summary = try await exportRunner.run(.manual(exportOptions))
-                        try await activityLogStore.append(.run(summary: summary, timestamp: now))
+                        let summary = try await automationExecution.runManualExport(exportOptions)
                         await send(.exportResponse(.success(summary)))
                     } catch {
-                        let range = exportOptions.dateRange.resolved(now: now)
-                        let failureSummary = ExportRunSummary(
-                            filename: "",
-                            relativePath: "",
-                            recordCount: 0,
-                            destination: .iCloudDrive,
-                            format: exportOptions.format,
-                            dateRangePreset: exportOptions.dateRange.preset,
-                            dateRange: range,
-                            triggerReason: .manualExport,
-                            automationID: nil,
-                            automationName: nil
-                        )
-                        try? await activityLogStore.append(
-                            .run(
-                                summary: failureSummary,
-                                status: .failure,
-                                errorDetails: error.localizedDescription,
-                                timestamp: now
-                            )
-                        )
                         await send(.exportResponse(.failure(UserFacingError(error.localizedDescription))))
                     }
                 }

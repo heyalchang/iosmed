@@ -16,7 +16,28 @@ struct SettingsView: View {
                 Text("One automation can be marked as the medication-taken automation.")
                 Text("That automation is the one MedSync will run after qualifying newly logged taken medication events wake the app.")
             }
+
+            Section("Permissions") {
+                LabeledContent("Notifications", value: store.notificationStatus.displayName)
+
+                Button("Allow Notifications") {
+                    store.send(.requestNotificationPermissionTapped)
+                }
+
+                Button("Request HealthKit Access") {
+                    store.send(.requestHealthKitAccessTapped)
+                }
+            }
+
+            if let statusMessage = store.statusMessage {
+                Section("Status") {
+                    Text(statusMessage)
+                }
+            }
         }
         .navigationTitle("Settings")
+        .task {
+            await store.send(.task).finish()
+        }
     }
 }

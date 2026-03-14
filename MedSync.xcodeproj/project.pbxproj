@@ -14,16 +14,26 @@
 		1838B260A39AFB9C9E58FC66 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 25AA8C4934BEF2A72F7AD0E0 /* Preview Assets.xcassets */; };
 		19B003709963539106861D63 /* ManualExportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027C4F7E6AE33EBD5AD652B1 /* ManualExportView.swift */; };
 		27EB609DB83D653CE7AC4F2C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E7880802469C1F1B423221BC /* Assets.xcassets */; };
+		2C5AEB67C3541862389A571C /* AutomationSchedulePlannerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09D6AA0D742B8C403CED462 /* AutomationSchedulePlannerTests.swift */; };
 		2CAD07D074930C0BD5C8488D /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D87CA7403DE267D1F85FC9 /* SettingsView.swift */; };
 		2D61B3B2F6B6847ED57DCFAB /* ActivityLogStoreClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4E7171DDE7F0A7B5EB4755 /* ActivityLogStoreClient.swift */; };
 		49975513EE62AE5374D3E172 /* UserFacingError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9087BF2AA5517D8ED2FF5AB8 /* UserFacingError.swift */; };
 		569919BE55976ED226F2A6CF /* Automation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5908D0F52A724051B6D8E764 /* Automation.swift */; };
+		579B80910F83D6839C9D8D4B /* AutomationRuntimeState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E716F95461AAABDBD29208 /* AutomationRuntimeState.swift */; };
 		5FD90717814909D08F99BCD5 /* IdentifiedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 9D098F7A0A9F014B072014D5 /* IdentifiedCollections */; };
+		62604F0064246CE672532059 /* LocalNotificationClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F3A0788810C70DDCE39FB0 /* LocalNotificationClient.swift */; };
+		6B64FCBC66D4C877288DDA0E /* RunAutomationIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF1294E09979AC20E8E405D /* RunAutomationIntent.swift */; };
+		6E5CE784AE36CE738E3E1F5C /* AppBootstrap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8631D6276BF2CCDEF8475444 /* AppBootstrap.swift */; };
 		6EF16E821D3704142F100847 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = DBDEF941EFDD7B0B204400BE /* ComposableArchitecture */; };
+		6F50943359EC26F2BB2A95B5 /* AutomationRuntimeStoreClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E458CD4DCB912964089F56 /* AutomationRuntimeStoreClient.swift */; };
+		7198D36005B1EB711A660B9A /* AutomationDetailFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE8E17345A2CCEA990C9CCA /* AutomationDetailFeature.swift */; };
 		899CCAD129434801D8AA9CDE /* MedicationExportPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B53F856FF7A71503C9FD85B /* MedicationExportPayload.swift */; };
+		8A8E2F625E9A3C1A76F2D41E /* AutomationDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348854C2AFA2A6DDE91363AF /* AutomationDetailView.swift */; };
+		8D25FB57AC66EB2FCAAF5231 /* AppRuntime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2935990E96D4069817033E2D /* AppRuntime.swift */; };
 		8EE79098446D57BD18775C57 /* AutomationEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F654F98A9710B34331D872 /* AutomationEditorView.swift */; };
 		93435669C3C8E3C2A378A598 /* ExportFileLayoutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081BB8DF7AD57115921E2725 /* ExportFileLayoutTests.swift */; };
 		997BB44966B000323F33293F /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C07C95C6E937379FF59A3E6 /* AppView.swift */; };
+		A1CF5F756A87E4D713E74FDE /* AutomationExecutionClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8F66965504CD3B7CB8F2A6 /* AutomationExecutionClient.swift */; };
 		A1DDD600500A688B8ED65848 /* ICloudDriveClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B4C34A30FECFFF4A1015FF /* ICloudDriveClient.swift */; };
 		A35D7383F741560948C2517C /* MedSyncUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3BB8C7FCF06FD641BF2F14E /* MedSyncUITests.swift */; };
 		AA57B2DDAD04EAF3A149AA93 /* Dependencies in Frameworks */ = {isa = PBXBuildFile; productRef = C195E85F4F4B3182FB4B84AA /* Dependencies */; };
@@ -42,6 +52,7 @@
 		D1DB407E1049704634312D9E /* SettingsFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B0CC0903EB794C2E9D5B13 /* SettingsFeature.swift */; };
 		D2EFA43E2D45546D5FD64D2C /* ExportRunSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440827B3EC2827E337C45109 /* ExportRunSummary.swift */; };
 		D9AF90575A271235A564F7EE /* AutomationEditorFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A5738A9C1CBA270E4F02FE8 /* AutomationEditorFeature.swift */; };
+		DB78F2EB2E8DE94E7B30E097 /* AutomationSchedulerClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41698DBFD98A46A58DA26F8 /* AutomationSchedulerClient.swift */; };
 		DC3204C05F36F6E8CD2ACB55 /* Perception in Frameworks */ = {isa = PBXBuildFile; productRef = ED91D0EE93569C19F890A9EC /* Perception */; };
 		E00A81E92A691589F5DEA586 /* MedicationExportSerializationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2A09D06A557AB91867830D /* MedicationExportSerializationTests.swift */; };
 		E085BADC03B6FBA1FFFF41E2 /* MedicationTriggerClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9DA21C9D87C11663D189EE /* MedicationTriggerClient.swift */; };
@@ -53,6 +64,7 @@
 		F7760D3EB19DCCAB477A1896 /* ExportFileLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509057FB957C6FBB513EE910 /* ExportFileLayout.swift */; };
 		F9F97F7AA8FCCFB3B8BBFC18 /* ManualExportFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01289CCA298570804EEFD91C /* ManualExportFeature.swift */; };
 		FAA7DED450FC610C6D16D1FA /* IdentifiedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 3C8C22773C06FDA2B14B3F4F /* IdentifiedCollections */; };
+		FD267BFC9954B7CD972669E6 /* MedicationTriggerPlannerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E533A5FBCB9CA18F938963FC /* MedicationTriggerPlannerTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,19 +90,27 @@
 		027C4F7E6AE33EBD5AD652B1 /* ManualExportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualExportView.swift; sourceTree = "<group>"; };
 		07B4C34A30FECFFF4A1015FF /* ICloudDriveClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ICloudDriveClient.swift; sourceTree = "<group>"; };
 		081BB8DF7AD57115921E2725 /* ExportFileLayoutTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportFileLayoutTests.swift; sourceTree = "<group>"; };
+		0A3AE97EFEEA90AD5DEF78D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		0FFB1F25C0BF44BBF40B8883 /* ActivityLogFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityLogFeature.swift; sourceTree = "<group>"; };
 		10A8E54658B78490253EA071 /* HealthKitClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitClient.swift; sourceTree = "<group>"; };
+		1DF1294E09979AC20E8E405D /* RunAutomationIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunAutomationIntent.swift; sourceTree = "<group>"; };
 		25AA8C4934BEF2A72F7AD0E0 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		2935990E96D4069817033E2D /* AppRuntime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRuntime.swift; sourceTree = "<group>"; };
 		2B627D04DED6D1C3439C8DA0 /* AutomationsFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutomationsFeature.swift; sourceTree = "<group>"; };
+		348854C2AFA2A6DDE91363AF /* AutomationDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutomationDetailView.swift; sourceTree = "<group>"; };
 		372E6AD76529B1B732D0D935 /* ActivityLogEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityLogEntry.swift; sourceTree = "<group>"; };
+		3F3DB474269C0192F094C3D1 /* MedSync.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MedSync.entitlements; sourceTree = "<group>"; };
 		440827B3EC2827E337C45109 /* ExportRunSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportRunSummary.swift; sourceTree = "<group>"; };
 		509057FB957C6FBB513EE910 /* ExportFileLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportFileLayout.swift; sourceTree = "<group>"; };
 		5908D0F52A724051B6D8E764 /* Automation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Automation.swift; sourceTree = "<group>"; };
 		5C07C95C6E937379FF59A3E6 /* AppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
+		61E716F95461AAABDBD29208 /* AutomationRuntimeState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutomationRuntimeState.swift; sourceTree = "<group>"; };
+		63E458CD4DCB912964089F56 /* AutomationRuntimeStoreClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutomationRuntimeStoreClient.swift; sourceTree = "<group>"; };
 		6F2A09D06A557AB91867830D /* MedicationExportSerializationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicationExportSerializationTests.swift; sourceTree = "<group>"; };
 		72A5E5C0878BA82F44FB5372 /* AutomationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutomationsView.swift; sourceTree = "<group>"; };
 		73D87CA7403DE267D1F85FC9 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		77B0CC0903EB794C2E9D5B13 /* SettingsFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsFeature.swift; sourceTree = "<group>"; };
+		8631D6276BF2CCDEF8475444 /* AppBootstrap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppBootstrap.swift; sourceTree = "<group>"; };
 		863597FF201FC7030D6DD6B4 /* ActivityLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityLogView.swift; sourceTree = "<group>"; };
 		8B53F856FF7A71503C9FD85B /* MedicationExportPayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicationExportPayload.swift; sourceTree = "<group>"; };
 		9087BF2AA5517D8ED2FF5AB8 /* UserFacingError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFacingError.swift; sourceTree = "<group>"; };
@@ -98,16 +118,22 @@
 		926A610EE62FFD9236FA6EEF /* MedSync.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = MedSync.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A5738A9C1CBA270E4F02FE8 /* AutomationEditorFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutomationEditorFeature.swift; sourceTree = "<group>"; };
 		9CFFBA11C93D28490F8E3079 /* AutomationsFeatureTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutomationsFeatureTests.swift; sourceTree = "<group>"; };
+		AA8F66965504CD3B7CB8F2A6 /* AutomationExecutionClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutomationExecutionClient.swift; sourceTree = "<group>"; };
 		AC9DA21C9D87C11663D189EE /* MedicationTriggerClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicationTriggerClient.swift; sourceTree = "<group>"; };
 		B0F654F98A9710B34331D872 /* AutomationEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutomationEditorView.swift; sourceTree = "<group>"; };
 		BB6EEF58FCECAA179ACE7D2C /* ExportRunnerClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportRunnerClient.swift; sourceTree = "<group>"; };
+		C09D6AA0D742B8C403CED462 /* AutomationSchedulePlannerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutomationSchedulePlannerTests.swift; sourceTree = "<group>"; };
 		CB4E7171DDE7F0A7B5EB4755 /* ActivityLogStoreClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityLogStoreClient.swift; sourceTree = "<group>"; };
+		D0F3A0788810C70DDCE39FB0 /* LocalNotificationClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationClient.swift; sourceTree = "<group>"; };
+		D41698DBFD98A46A58DA26F8 /* AutomationSchedulerClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutomationSchedulerClient.swift; sourceTree = "<group>"; };
 		DEF91AEECACE846ED83375CA /* MedSyncTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = MedSyncTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3BB8C7FCF06FD641BF2F14E /* MedSyncUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedSyncUITests.swift; sourceTree = "<group>"; };
+		E533A5FBCB9CA18F938963FC /* MedicationTriggerPlannerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicationTriggerPlannerTests.swift; sourceTree = "<group>"; };
 		E63F54147D7814B3D421A7F3 /* MedicationExportConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicationExportConfiguration.swift; sourceTree = "<group>"; };
 		E7880802469C1F1B423221BC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E7E0C31CE4D57360C1FF67A5 /* ManualExportFeatureTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualExportFeatureTests.swift; sourceTree = "<group>"; };
 		E8759A9104054AD8A086375E /* AutomationStoreClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutomationStoreClient.swift; sourceTree = "<group>"; };
+		EEE8E17345A2CCEA990C9CCA /* AutomationDetailFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutomationDetailFeature.swift; sourceTree = "<group>"; };
 		F1DE8C86E739353F02292906 /* MedSyncUITests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = MedSyncUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA682C1FA208D1424AD34496 /* AppFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFeature.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -145,7 +171,9 @@
 		01EEBA79BF4DD4DD281FC4FD /* App */ = {
 			isa = PBXGroup;
 			children = (
+				8631D6276BF2CCDEF8475444 /* AppBootstrap.swift */,
 				FA682C1FA208D1424AD34496 /* AppFeature.swift */,
+				2935990E96D4069817033E2D /* AppRuntime.swift */,
 				5C07C95C6E937379FF59A3E6 /* AppView.swift */,
 			);
 			path = App;
@@ -176,6 +204,14 @@
 				25AA8C4934BEF2A72F7AD0E0 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		2FE259196530B87D45DCBEF8 /* AppIntents */ = {
+			isa = PBXGroup;
+			children = (
+				1DF1294E09979AC20E8E405D /* RunAutomationIntent.swift */,
+			);
+			path = AppIntents;
 			sourceTree = "<group>";
 		};
 		369ED8804A181894DF7184C3 = {
@@ -209,6 +245,7 @@
 			children = (
 				909E75019F58E0256C041C75 /* MedSyncApp.swift */,
 				01EEBA79BF4DD4DD281FC4FD /* App */,
+				2FE259196530B87D45DCBEF8 /* AppIntents */,
 				A6C176CEDF46E22B0F402835 /* Clients */,
 				64E78F674C983EFEE394642F /* Domain */,
 				7BC6868A81C6ECF45F575BDC /* Features */,
@@ -224,6 +261,7 @@
 			children = (
 				372E6AD76529B1B732D0D935 /* ActivityLogEntry.swift */,
 				5908D0F52A724051B6D8E764 /* Automation.swift */,
+				61E716F95461AAABDBD29208 /* AutomationRuntimeState.swift */,
 				509057FB957C6FBB513EE910 /* ExportFileLayout.swift */,
 				440827B3EC2827E337C45109 /* ExportRunSummary.swift */,
 				E63F54147D7814B3D421A7F3 /* MedicationExportConfiguration.swift */,
@@ -245,8 +283,10 @@
 		78682960529AB133210D0E68 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				C09D6AA0D742B8C403CED462 /* AutomationSchedulePlannerTests.swift */,
 				081BB8DF7AD57115921E2725 /* ExportFileLayoutTests.swift */,
 				6F2A09D06A557AB91867830D /* MedicationExportSerializationTests.swift */,
+				E533A5FBCB9CA18F938963FC /* MedicationTriggerPlannerTests.swift */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -275,10 +315,14 @@
 			isa = PBXGroup;
 			children = (
 				CB4E7171DDE7F0A7B5EB4755 /* ActivityLogStoreClient.swift */,
+				AA8F66965504CD3B7CB8F2A6 /* AutomationExecutionClient.swift */,
+				63E458CD4DCB912964089F56 /* AutomationRuntimeStoreClient.swift */,
+				D41698DBFD98A46A58DA26F8 /* AutomationSchedulerClient.swift */,
 				E8759A9104054AD8A086375E /* AutomationStoreClient.swift */,
 				BB6EEF58FCECAA179ACE7D2C /* ExportRunnerClient.swift */,
 				10A8E54658B78490253EA071 /* HealthKitClient.swift */,
 				07B4C34A30FECFFF4A1015FF /* ICloudDriveClient.swift */,
+				D0F3A0788810C70DDCE39FB0 /* LocalNotificationClient.swift */,
 				AC9DA21C9D87C11663D189EE /* MedicationTriggerClient.swift */,
 			);
 			path = Clients;
@@ -296,6 +340,8 @@
 		BA21DB269B0A84B7C4062EC3 /* Automations */ = {
 			isa = PBXGroup;
 			children = (
+				EEE8E17345A2CCEA990C9CCA /* AutomationDetailFeature.swift */,
+				348854C2AFA2A6DDE91363AF /* AutomationDetailView.swift */,
 				9A5738A9C1CBA270E4F02FE8 /* AutomationEditorFeature.swift */,
 				B0F654F98A9710B34331D872 /* AutomationEditorView.swift */,
 				2B627D04DED6D1C3439C8DA0 /* AutomationsFeature.swift */,
@@ -317,6 +363,8 @@
 			isa = PBXGroup;
 			children = (
 				E7880802469C1F1B423221BC /* Assets.xcassets */,
+				0A3AE97EFEEA90AD5DEF78D2 /* Info.plist */,
+				3F3DB474269C0192F094C3D1 /* MedSync.entitlements */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -465,10 +513,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C5AEB67C3541862389A571C /* AutomationSchedulePlannerTests.swift in Sources */,
 				AC3C888C9053AC9C62D2E62F /* AutomationsFeatureTests.swift in Sources */,
 				93435669C3C8E3C2A378A598 /* ExportFileLayoutTests.swift in Sources */,
 				B251A506CB5F1B116577BB52 /* ManualExportFeatureTests.swift in Sources */,
 				E00A81E92A691589F5DEA586 /* MedicationExportSerializationTests.swift in Sources */,
+				FD267BFC9954B7CD972669E6 /* MedicationTriggerPlannerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -480,11 +530,19 @@
 				B6717507819357173AF406F1 /* ActivityLogFeature.swift in Sources */,
 				2D61B3B2F6B6847ED57DCFAB /* ActivityLogStoreClient.swift in Sources */,
 				BD4AD464481AE5D976CD3C3D /* ActivityLogView.swift in Sources */,
+				6E5CE784AE36CE738E3E1F5C /* AppBootstrap.swift in Sources */,
 				B69FE610EEC44666B365344C /* AppFeature.swift in Sources */,
+				8D25FB57AC66EB2FCAAF5231 /* AppRuntime.swift in Sources */,
 				997BB44966B000323F33293F /* AppView.swift in Sources */,
 				569919BE55976ED226F2A6CF /* Automation.swift in Sources */,
+				7198D36005B1EB711A660B9A /* AutomationDetailFeature.swift in Sources */,
+				8A8E2F625E9A3C1A76F2D41E /* AutomationDetailView.swift in Sources */,
 				D9AF90575A271235A564F7EE /* AutomationEditorFeature.swift in Sources */,
 				8EE79098446D57BD18775C57 /* AutomationEditorView.swift in Sources */,
+				A1CF5F756A87E4D713E74FDE /* AutomationExecutionClient.swift in Sources */,
+				579B80910F83D6839C9D8D4B /* AutomationRuntimeState.swift in Sources */,
+				6F50943359EC26F2BB2A95B5 /* AutomationRuntimeStoreClient.swift in Sources */,
+				DB78F2EB2E8DE94E7B30E097 /* AutomationSchedulerClient.swift in Sources */,
 				0AF8709D5889F24E83F55FD7 /* AutomationStoreClient.swift in Sources */,
 				E71E4FE7D23A427CF3F9E09A /* AutomationsFeature.swift in Sources */,
 				B188156D4AE6EC892F2A61E7 /* AutomationsView.swift in Sources */,
@@ -494,12 +552,14 @@
 				11F78DB0CACF570323664AD4 /* HealthKitClient.swift in Sources */,
 				A1DDD600500A688B8ED65848 /* ICloudDriveClient.swift in Sources */,
 				BC1C3DC886B35EB7B6C6A707 /* JSONFileStore.swift in Sources */,
+				62604F0064246CE672532059 /* LocalNotificationClient.swift in Sources */,
 				F9F97F7AA8FCCFB3B8BBFC18 /* ManualExportFeature.swift in Sources */,
 				19B003709963539106861D63 /* ManualExportView.swift in Sources */,
 				C2023A2EA4702D4A1EE07798 /* MedSyncApp.swift in Sources */,
 				C6BB9AC28A872FAA8FA8409B /* MedicationExportConfiguration.swift in Sources */,
 				899CCAD129434801D8AA9CDE /* MedicationExportPayload.swift in Sources */,
 				E085BADC03B6FBA1FFFF41E2 /* MedicationTriggerClient.swift in Sources */,
+				6B64FCBC66D4C877288DDA0E /* RunAutomationIntent.swift in Sources */,
 				D1DB407E1049704634312D9E /* SettingsFeature.swift in Sources */,
 				2CAD07D074930C0BD5C8488D /* SettingsView.swift in Sources */,
 				49975513EE62AE5374D3E172 /* UserFacingError.swift in Sources */,
@@ -545,19 +605,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = MedSync/Resources/MedSync.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = MedSync;
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
-				INFOPLIST_KEY_NSHealthShareUsageDescription = "MedSync reads medication data from HealthKit to export it to iCloud Drive.";
-				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "MedSync may subscribe to medication updates so a selected automation can run after a taken medication event.";
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = (
-					UIInterfaceOrientationPortrait,
-				);
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = MedSync/Resources/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -611,19 +663,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = MedSync/Resources/MedSync.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = MedSync;
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
-				INFOPLIST_KEY_NSHealthShareUsageDescription = "MedSync reads medication data from HealthKit to export it to iCloud Drive.";
-				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "MedSync may subscribe to medication updates so a selected automation can run after a taken medication event.";
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = (
-					UIInterfaceOrientationPortrait,
-				);
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = MedSync/Resources/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

@@ -40,6 +40,9 @@ struct AutomationsView: View {
                 AutomationEditorView(store: editorStore)
             }
         }
+        .navigationDestination(item: $store.scope(state: \.detail, action: \.detail)) { detailStore in
+            AutomationDetailView(store: detailStore)
+        }
     }
 
     @ViewBuilder
@@ -78,6 +81,9 @@ struct AutomationsView: View {
                     onRunNow: {
                         store.send(.runNowButtonTapped(automation.id))
                     },
+                    onHistory: {
+                        store.send(.automationTapped(automation.id))
+                    },
                     onEdit: {
                         store.send(.editButtonTapped(automation.id))
                     }
@@ -100,6 +106,7 @@ private struct AutomationRowView: View {
     let automation: Automation
     let onToggleEnabled: (Bool) -> Void
     let onRunNow: () -> Void
+    let onHistory: () -> Void
     let onEdit: () -> Void
 
     var body: some View {
@@ -137,6 +144,7 @@ private struct AutomationRowView: View {
 
             HStack {
                 Button("Run Now", action: onRunNow)
+                Button("History", action: onHistory)
                 Button("Edit", action: onEdit)
             }
             .buttonStyle(.borderless)
