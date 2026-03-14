@@ -1,0 +1,932 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0104AF64D55BEC467A079579 /* PerceptionCore in Frameworks */ = {isa = PBXBuildFile; productRef = A0C8932750AC3E8248778C8F /* PerceptionCore */; };
+		0AF8709D5889F24E83F55FD7 /* AutomationStoreClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8759A9104054AD8A086375E /* AutomationStoreClient.swift */; };
+		11F78DB0CACF570323664AD4 /* HealthKitClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A8E54658B78490253EA071 /* HealthKitClient.swift */; };
+		151E45B57727878D42D5F106 /* CasePaths in Frameworks */ = {isa = PBXBuildFile; productRef = 7DD2A0746A4057046419C391 /* CasePaths */; };
+		1838B260A39AFB9C9E58FC66 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 25AA8C4934BEF2A72F7AD0E0 /* Preview Assets.xcassets */; };
+		19B003709963539106861D63 /* ManualExportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027C4F7E6AE33EBD5AD652B1 /* ManualExportView.swift */; };
+		27EB609DB83D653CE7AC4F2C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E7880802469C1F1B423221BC /* Assets.xcassets */; };
+		2CAD07D074930C0BD5C8488D /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D87CA7403DE267D1F85FC9 /* SettingsView.swift */; };
+		2D61B3B2F6B6847ED57DCFAB /* ActivityLogStoreClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4E7171DDE7F0A7B5EB4755 /* ActivityLogStoreClient.swift */; };
+		49975513EE62AE5374D3E172 /* UserFacingError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9087BF2AA5517D8ED2FF5AB8 /* UserFacingError.swift */; };
+		569919BE55976ED226F2A6CF /* Automation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5908D0F52A724051B6D8E764 /* Automation.swift */; };
+		5FD90717814909D08F99BCD5 /* IdentifiedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 9D098F7A0A9F014B072014D5 /* IdentifiedCollections */; };
+		6EF16E821D3704142F100847 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = DBDEF941EFDD7B0B204400BE /* ComposableArchitecture */; };
+		899CCAD129434801D8AA9CDE /* MedicationExportPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B53F856FF7A71503C9FD85B /* MedicationExportPayload.swift */; };
+		8EE79098446D57BD18775C57 /* AutomationEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F654F98A9710B34331D872 /* AutomationEditorView.swift */; };
+		93435669C3C8E3C2A378A598 /* ExportFileLayoutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081BB8DF7AD57115921E2725 /* ExportFileLayoutTests.swift */; };
+		997BB44966B000323F33293F /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C07C95C6E937379FF59A3E6 /* AppView.swift */; };
+		A1DDD600500A688B8ED65848 /* ICloudDriveClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B4C34A30FECFFF4A1015FF /* ICloudDriveClient.swift */; };
+		A35D7383F741560948C2517C /* MedSyncUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3BB8C7FCF06FD641BF2F14E /* MedSyncUITests.swift */; };
+		AA57B2DDAD04EAF3A149AA93 /* Dependencies in Frameworks */ = {isa = PBXBuildFile; productRef = C195E85F4F4B3182FB4B84AA /* Dependencies */; };
+		AC3C888C9053AC9C62D2E62F /* AutomationsFeatureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFFBA11C93D28490F8E3079 /* AutomationsFeatureTests.swift */; };
+		B0BC4DC7E9630A00AA9CF3A7 /* PerceptionCore in Frameworks */ = {isa = PBXBuildFile; productRef = 227870C746F041187B009263 /* PerceptionCore */; };
+		B188156D4AE6EC892F2A61E7 /* AutomationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A5E5C0878BA82F44FB5372 /* AutomationsView.swift */; };
+		B251A506CB5F1B116577BB52 /* ManualExportFeatureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E0C31CE4D57360C1FF67A5 /* ManualExportFeatureTests.swift */; };
+		B6717507819357173AF406F1 /* ActivityLogFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FFB1F25C0BF44BBF40B8883 /* ActivityLogFeature.swift */; };
+		B69FE610EEC44666B365344C /* AppFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA682C1FA208D1424AD34496 /* AppFeature.swift */; };
+		B753EDABA1E8FCFA8955D925 /* ExportRunnerClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6EEF58FCECAA179ACE7D2C /* ExportRunnerClient.swift */; };
+		B95BC07F2BDC0B40BC478890 /* Dependencies in Frameworks */ = {isa = PBXBuildFile; productRef = ADA5560079A1E4460CB97EA5 /* Dependencies */; };
+		BC1C3DC886B35EB7B6C6A707 /* JSONFileStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FF444FCECDCA13CD2B152E /* JSONFileStore.swift */; };
+		BD4AD464481AE5D976CD3C3D /* ActivityLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 863597FF201FC7030D6DD6B4 /* ActivityLogView.swift */; };
+		C2023A2EA4702D4A1EE07798 /* MedSyncApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909E75019F58E0256C041C75 /* MedSyncApp.swift */; };
+		C6BB9AC28A872FAA8FA8409B /* MedicationExportConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = E63F54147D7814B3D421A7F3 /* MedicationExportConfiguration.swift */; };
+		D1DB407E1049704634312D9E /* SettingsFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B0CC0903EB794C2E9D5B13 /* SettingsFeature.swift */; };
+		D2EFA43E2D45546D5FD64D2C /* ExportRunSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440827B3EC2827E337C45109 /* ExportRunSummary.swift */; };
+		D9AF90575A271235A564F7EE /* AutomationEditorFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A5738A9C1CBA270E4F02FE8 /* AutomationEditorFeature.swift */; };
+		DC3204C05F36F6E8CD2ACB55 /* Perception in Frameworks */ = {isa = PBXBuildFile; productRef = ED91D0EE93569C19F890A9EC /* Perception */; };
+		E00A81E92A691589F5DEA586 /* MedicationExportSerializationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2A09D06A557AB91867830D /* MedicationExportSerializationTests.swift */; };
+		E085BADC03B6FBA1FFFF41E2 /* MedicationTriggerClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9DA21C9D87C11663D189EE /* MedicationTriggerClient.swift */; };
+		E148A58537683044261732A5 /* ActivityLogEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 372E6AD76529B1B732D0D935 /* ActivityLogEntry.swift */; };
+		E71E4FE7D23A427CF3F9E09A /* AutomationsFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B627D04DED6D1C3439C8DA0 /* AutomationsFeature.swift */; };
+		E77FD70B45B7225CD174A7F4 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = F084CA91D44D547B3BA35056 /* ComposableArchitecture */; };
+		E82658225253D1245D59534D /* CasePaths in Frameworks */ = {isa = PBXBuildFile; productRef = 8AEC99A7099A49325709D459 /* CasePaths */; };
+		F5AFA7D2DBA16C7613D7E96B /* Perception in Frameworks */ = {isa = PBXBuildFile; productRef = A56F5461A7D873013A7D02F0 /* Perception */; };
+		F7760D3EB19DCCAB477A1896 /* ExportFileLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509057FB957C6FBB513EE910 /* ExportFileLayout.swift */; };
+		F9F97F7AA8FCCFB3B8BBFC18 /* ManualExportFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01289CCA298570804EEFD91C /* ManualExportFeature.swift */; };
+		FAA7DED450FC610C6D16D1FA /* IdentifiedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 3C8C22773C06FDA2B14B3F4F /* IdentifiedCollections */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		972C6CD2186FD631C1FD60A9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9DF7CF2017D1CE49C7CA21B8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 62624C7009B27C6409492092;
+			remoteInfo = MedSync;
+		};
+		EF2D20C848832A175FDC84F6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9DF7CF2017D1CE49C7CA21B8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 62624C7009B27C6409492092;
+			remoteInfo = MedSync;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		01289CCA298570804EEFD91C /* ManualExportFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualExportFeature.swift; sourceTree = "<group>"; };
+		01FF444FCECDCA13CD2B152E /* JSONFileStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONFileStore.swift; sourceTree = "<group>"; };
+		027C4F7E6AE33EBD5AD652B1 /* ManualExportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualExportView.swift; sourceTree = "<group>"; };
+		07B4C34A30FECFFF4A1015FF /* ICloudDriveClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ICloudDriveClient.swift; sourceTree = "<group>"; };
+		081BB8DF7AD57115921E2725 /* ExportFileLayoutTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportFileLayoutTests.swift; sourceTree = "<group>"; };
+		0FFB1F25C0BF44BBF40B8883 /* ActivityLogFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityLogFeature.swift; sourceTree = "<group>"; };
+		10A8E54658B78490253EA071 /* HealthKitClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitClient.swift; sourceTree = "<group>"; };
+		25AA8C4934BEF2A72F7AD0E0 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		2B627D04DED6D1C3439C8DA0 /* AutomationsFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutomationsFeature.swift; sourceTree = "<group>"; };
+		372E6AD76529B1B732D0D935 /* ActivityLogEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityLogEntry.swift; sourceTree = "<group>"; };
+		440827B3EC2827E337C45109 /* ExportRunSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportRunSummary.swift; sourceTree = "<group>"; };
+		509057FB957C6FBB513EE910 /* ExportFileLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportFileLayout.swift; sourceTree = "<group>"; };
+		5908D0F52A724051B6D8E764 /* Automation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Automation.swift; sourceTree = "<group>"; };
+		5C07C95C6E937379FF59A3E6 /* AppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
+		6F2A09D06A557AB91867830D /* MedicationExportSerializationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicationExportSerializationTests.swift; sourceTree = "<group>"; };
+		72A5E5C0878BA82F44FB5372 /* AutomationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutomationsView.swift; sourceTree = "<group>"; };
+		73D87CA7403DE267D1F85FC9 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		77B0CC0903EB794C2E9D5B13 /* SettingsFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsFeature.swift; sourceTree = "<group>"; };
+		863597FF201FC7030D6DD6B4 /* ActivityLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityLogView.swift; sourceTree = "<group>"; };
+		8B53F856FF7A71503C9FD85B /* MedicationExportPayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicationExportPayload.swift; sourceTree = "<group>"; };
+		9087BF2AA5517D8ED2FF5AB8 /* UserFacingError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFacingError.swift; sourceTree = "<group>"; };
+		909E75019F58E0256C041C75 /* MedSyncApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedSyncApp.swift; sourceTree = "<group>"; };
+		926A610EE62FFD9236FA6EEF /* MedSync.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = MedSync.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9A5738A9C1CBA270E4F02FE8 /* AutomationEditorFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutomationEditorFeature.swift; sourceTree = "<group>"; };
+		9CFFBA11C93D28490F8E3079 /* AutomationsFeatureTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutomationsFeatureTests.swift; sourceTree = "<group>"; };
+		AC9DA21C9D87C11663D189EE /* MedicationTriggerClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicationTriggerClient.swift; sourceTree = "<group>"; };
+		B0F654F98A9710B34331D872 /* AutomationEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutomationEditorView.swift; sourceTree = "<group>"; };
+		BB6EEF58FCECAA179ACE7D2C /* ExportRunnerClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportRunnerClient.swift; sourceTree = "<group>"; };
+		CB4E7171DDE7F0A7B5EB4755 /* ActivityLogStoreClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityLogStoreClient.swift; sourceTree = "<group>"; };
+		DEF91AEECACE846ED83375CA /* MedSyncTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = MedSyncTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E3BB8C7FCF06FD641BF2F14E /* MedSyncUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedSyncUITests.swift; sourceTree = "<group>"; };
+		E63F54147D7814B3D421A7F3 /* MedicationExportConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicationExportConfiguration.swift; sourceTree = "<group>"; };
+		E7880802469C1F1B423221BC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		E7E0C31CE4D57360C1FF67A5 /* ManualExportFeatureTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualExportFeatureTests.swift; sourceTree = "<group>"; };
+		E8759A9104054AD8A086375E /* AutomationStoreClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutomationStoreClient.swift; sourceTree = "<group>"; };
+		F1DE8C86E739353F02292906 /* MedSyncUITests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = MedSyncUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		FA682C1FA208D1424AD34496 /* AppFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFeature.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		90FB9EA70849592FA5343B92 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6EF16E821D3704142F100847 /* ComposableArchitecture in Frameworks */,
+				B95BC07F2BDC0B40BC478890 /* Dependencies in Frameworks */,
+				FAA7DED450FC610C6D16D1FA /* IdentifiedCollections in Frameworks */,
+				E82658225253D1245D59534D /* CasePaths in Frameworks */,
+				F5AFA7D2DBA16C7613D7E96B /* Perception in Frameworks */,
+				B0BC4DC7E9630A00AA9CF3A7 /* PerceptionCore in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A7EB1D4638194985EA8ADE19 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E77FD70B45B7225CD174A7F4 /* ComposableArchitecture in Frameworks */,
+				AA57B2DDAD04EAF3A149AA93 /* Dependencies in Frameworks */,
+				5FD90717814909D08F99BCD5 /* IdentifiedCollections in Frameworks */,
+				151E45B57727878D42D5F106 /* CasePaths in Frameworks */,
+				DC3204C05F36F6E8CD2ACB55 /* Perception in Frameworks */,
+				0104AF64D55BEC467A079579 /* PerceptionCore in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		01EEBA79BF4DD4DD281FC4FD /* App */ = {
+			isa = PBXGroup;
+			children = (
+				FA682C1FA208D1424AD34496 /* AppFeature.swift */,
+				5C07C95C6E937379FF59A3E6 /* AppView.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		1ADFF032F57F11646B70FB49 /* MedSyncTests */ = {
+			isa = PBXGroup;
+			children = (
+				78682960529AB133210D0E68 /* Domain */,
+				7D7CA627E569268503C4BCED /* Features */,
+			);
+			path = MedSyncTests;
+			sourceTree = "<group>";
+		};
+		208FB6F0E49D59A86D43A4E3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				926A610EE62FFD9236FA6EEF /* MedSync.app */,
+				DEF91AEECACE846ED83375CA /* MedSyncTests.xctest */,
+				F1DE8C86E739353F02292906 /* MedSyncUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2785445823934E45AE41402D /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				25AA8C4934BEF2A72F7AD0E0 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		369ED8804A181894DF7184C3 = {
+			isa = PBXGroup;
+			children = (
+				5BEC13412A00F0ACCBCE2D2F /* MedSync */,
+				1ADFF032F57F11646B70FB49 /* MedSyncTests */,
+				3BD450F131A781F755ECF8BC /* MedSyncUITests */,
+				208FB6F0E49D59A86D43A4E3 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		3BD450F131A781F755ECF8BC /* MedSyncUITests */ = {
+			isa = PBXGroup;
+			children = (
+				E3BB8C7FCF06FD641BF2F14E /* MedSyncUITests.swift */,
+			);
+			path = MedSyncUITests;
+			sourceTree = "<group>";
+		};
+		5AA421A9D435321E32B15973 /* Infrastructure */ = {
+			isa = PBXGroup;
+			children = (
+				01FF444FCECDCA13CD2B152E /* JSONFileStore.swift */,
+			);
+			path = Infrastructure;
+			sourceTree = "<group>";
+		};
+		5BEC13412A00F0ACCBCE2D2F /* MedSync */ = {
+			isa = PBXGroup;
+			children = (
+				909E75019F58E0256C041C75 /* MedSyncApp.swift */,
+				01EEBA79BF4DD4DD281FC4FD /* App */,
+				A6C176CEDF46E22B0F402835 /* Clients */,
+				64E78F674C983EFEE394642F /* Domain */,
+				7BC6868A81C6ECF45F575BDC /* Features */,
+				5AA421A9D435321E32B15973 /* Infrastructure */,
+				2785445823934E45AE41402D /* Preview Content */,
+				F501DC89D63DB0EE81EBD009 /* Resources */,
+			);
+			path = MedSync;
+			sourceTree = "<group>";
+		};
+		64E78F674C983EFEE394642F /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				372E6AD76529B1B732D0D935 /* ActivityLogEntry.swift */,
+				5908D0F52A724051B6D8E764 /* Automation.swift */,
+				509057FB957C6FBB513EE910 /* ExportFileLayout.swift */,
+				440827B3EC2827E337C45109 /* ExportRunSummary.swift */,
+				E63F54147D7814B3D421A7F3 /* MedicationExportConfiguration.swift */,
+				8B53F856FF7A71503C9FD85B /* MedicationExportPayload.swift */,
+				9087BF2AA5517D8ED2FF5AB8 /* UserFacingError.swift */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		6A718990DF09A877DB81DDF9 /* ActivityLog */ = {
+			isa = PBXGroup;
+			children = (
+				0FFB1F25C0BF44BBF40B8883 /* ActivityLogFeature.swift */,
+				863597FF201FC7030D6DD6B4 /* ActivityLogView.swift */,
+			);
+			path = ActivityLog;
+			sourceTree = "<group>";
+		};
+		78682960529AB133210D0E68 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				081BB8DF7AD57115921E2725 /* ExportFileLayoutTests.swift */,
+				6F2A09D06A557AB91867830D /* MedicationExportSerializationTests.swift */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		7BC6868A81C6ECF45F575BDC /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				6A718990DF09A877DB81DDF9 /* ActivityLog */,
+				BA21DB269B0A84B7C4062EC3 /* Automations */,
+				AFEB1CD64B214C18F3AA55DF /* ManualExport */,
+				E5FB7C687E7FB0CFEE6A58AE /* Settings */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		7D7CA627E569268503C4BCED /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				9CFFBA11C93D28490F8E3079 /* AutomationsFeatureTests.swift */,
+				E7E0C31CE4D57360C1FF67A5 /* ManualExportFeatureTests.swift */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		A6C176CEDF46E22B0F402835 /* Clients */ = {
+			isa = PBXGroup;
+			children = (
+				CB4E7171DDE7F0A7B5EB4755 /* ActivityLogStoreClient.swift */,
+				E8759A9104054AD8A086375E /* AutomationStoreClient.swift */,
+				BB6EEF58FCECAA179ACE7D2C /* ExportRunnerClient.swift */,
+				10A8E54658B78490253EA071 /* HealthKitClient.swift */,
+				07B4C34A30FECFFF4A1015FF /* ICloudDriveClient.swift */,
+				AC9DA21C9D87C11663D189EE /* MedicationTriggerClient.swift */,
+			);
+			path = Clients;
+			sourceTree = "<group>";
+		};
+		AFEB1CD64B214C18F3AA55DF /* ManualExport */ = {
+			isa = PBXGroup;
+			children = (
+				01289CCA298570804EEFD91C /* ManualExportFeature.swift */,
+				027C4F7E6AE33EBD5AD652B1 /* ManualExportView.swift */,
+			);
+			path = ManualExport;
+			sourceTree = "<group>";
+		};
+		BA21DB269B0A84B7C4062EC3 /* Automations */ = {
+			isa = PBXGroup;
+			children = (
+				9A5738A9C1CBA270E4F02FE8 /* AutomationEditorFeature.swift */,
+				B0F654F98A9710B34331D872 /* AutomationEditorView.swift */,
+				2B627D04DED6D1C3439C8DA0 /* AutomationsFeature.swift */,
+				72A5E5C0878BA82F44FB5372 /* AutomationsView.swift */,
+			);
+			path = Automations;
+			sourceTree = "<group>";
+		};
+		E5FB7C687E7FB0CFEE6A58AE /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				77B0CC0903EB794C2E9D5B13 /* SettingsFeature.swift */,
+				73D87CA7403DE267D1F85FC9 /* SettingsView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		F501DC89D63DB0EE81EBD009 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				E7880802469C1F1B423221BC /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1D0F4242364E45763AF92F5D /* MedSyncTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 90A9CC29A90B58598D4226D9 /* Build configuration list for PBXNativeTarget "MedSyncTests" */;
+			buildPhases = (
+				2E3F5281E807F98044A402F1 /* Sources */,
+				A7EB1D4638194985EA8ADE19 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4AD17AA9E480C83D6C000D60 /* PBXTargetDependency */,
+			);
+			name = MedSyncTests;
+			packageProductDependencies = (
+				F084CA91D44D547B3BA35056 /* ComposableArchitecture */,
+				C195E85F4F4B3182FB4B84AA /* Dependencies */,
+				9D098F7A0A9F014B072014D5 /* IdentifiedCollections */,
+				7DD2A0746A4057046419C391 /* CasePaths */,
+				ED91D0EE93569C19F890A9EC /* Perception */,
+				A0C8932750AC3E8248778C8F /* PerceptionCore */,
+			);
+			productName = MedSyncTests;
+			productReference = DEF91AEECACE846ED83375CA /* MedSyncTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		55E0F7FFE22D4CAEF2560619 /* MedSyncUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AA869A5474E1743C63F55012 /* Build configuration list for PBXNativeTarget "MedSyncUITests" */;
+			buildPhases = (
+				0615CE6558D10A44DA467988 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D842110C2109FDB76E26CDE1 /* PBXTargetDependency */,
+			);
+			name = MedSyncUITests;
+			packageProductDependencies = (
+			);
+			productName = MedSyncUITests;
+			productReference = F1DE8C86E739353F02292906 /* MedSyncUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		62624C7009B27C6409492092 /* MedSync */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A49678A703AD213A63FE7635 /* Build configuration list for PBXNativeTarget "MedSync" */;
+			buildPhases = (
+				6509DE0CEFEE88ABC3735592 /* Sources */,
+				3843DC2AD164D3755768AE52 /* Resources */,
+				90FB9EA70849592FA5343B92 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MedSync;
+			packageProductDependencies = (
+				DBDEF941EFDD7B0B204400BE /* ComposableArchitecture */,
+				ADA5560079A1E4460CB97EA5 /* Dependencies */,
+				3C8C22773C06FDA2B14B3F4F /* IdentifiedCollections */,
+				8AEC99A7099A49325709D459 /* CasePaths */,
+				A56F5461A7D873013A7D02F0 /* Perception */,
+				227870C746F041187B009263 /* PerceptionCore */,
+			);
+			productName = MedSync;
+			productReference = 926A610EE62FFD9236FA6EEF /* MedSync.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		9DF7CF2017D1CE49C7CA21B8 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					1D0F4242364E45763AF92F5D = {
+						TestTargetID = 62624C7009B27C6409492092;
+					};
+					55E0F7FFE22D4CAEF2560619 = {
+						TestTargetID = 62624C7009B27C6409492092;
+					};
+					62624C7009B27C6409492092 = {
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 9C6F4A015A53EBB2C80B06D1 /* Build configuration list for PBXProject "MedSync" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 369ED8804A181894DF7184C3;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				906729265C2F796EA10DECC2 /* XCRemoteSwiftPackageReference "swift-case-paths" */,
+				1A5CA6D62900701D37E6BD36 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
+				FC69DA451CE84E9097F6D54E /* XCRemoteSwiftPackageReference "swift-dependencies" */,
+				C84AA43EA18D030EC1E96DFF /* XCRemoteSwiftPackageReference "swift-identified-collections" */,
+				31FE0D1A2E8E41B01BD7EE5B /* XCRemoteSwiftPackageReference "swift-perception" */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 208FB6F0E49D59A86D43A4E3 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				62624C7009B27C6409492092 /* MedSync */,
+				1D0F4242364E45763AF92F5D /* MedSyncTests */,
+				55E0F7FFE22D4CAEF2560619 /* MedSyncUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		3843DC2AD164D3755768AE52 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				27EB609DB83D653CE7AC4F2C /* Assets.xcassets in Resources */,
+				1838B260A39AFB9C9E58FC66 /* Preview Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0615CE6558D10A44DA467988 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A35D7383F741560948C2517C /* MedSyncUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2E3F5281E807F98044A402F1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AC3C888C9053AC9C62D2E62F /* AutomationsFeatureTests.swift in Sources */,
+				93435669C3C8E3C2A378A598 /* ExportFileLayoutTests.swift in Sources */,
+				B251A506CB5F1B116577BB52 /* ManualExportFeatureTests.swift in Sources */,
+				E00A81E92A691589F5DEA586 /* MedicationExportSerializationTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6509DE0CEFEE88ABC3735592 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E148A58537683044261732A5 /* ActivityLogEntry.swift in Sources */,
+				B6717507819357173AF406F1 /* ActivityLogFeature.swift in Sources */,
+				2D61B3B2F6B6847ED57DCFAB /* ActivityLogStoreClient.swift in Sources */,
+				BD4AD464481AE5D976CD3C3D /* ActivityLogView.swift in Sources */,
+				B69FE610EEC44666B365344C /* AppFeature.swift in Sources */,
+				997BB44966B000323F33293F /* AppView.swift in Sources */,
+				569919BE55976ED226F2A6CF /* Automation.swift in Sources */,
+				D9AF90575A271235A564F7EE /* AutomationEditorFeature.swift in Sources */,
+				8EE79098446D57BD18775C57 /* AutomationEditorView.swift in Sources */,
+				0AF8709D5889F24E83F55FD7 /* AutomationStoreClient.swift in Sources */,
+				E71E4FE7D23A427CF3F9E09A /* AutomationsFeature.swift in Sources */,
+				B188156D4AE6EC892F2A61E7 /* AutomationsView.swift in Sources */,
+				F7760D3EB19DCCAB477A1896 /* ExportFileLayout.swift in Sources */,
+				D2EFA43E2D45546D5FD64D2C /* ExportRunSummary.swift in Sources */,
+				B753EDABA1E8FCFA8955D925 /* ExportRunnerClient.swift in Sources */,
+				11F78DB0CACF570323664AD4 /* HealthKitClient.swift in Sources */,
+				A1DDD600500A688B8ED65848 /* ICloudDriveClient.swift in Sources */,
+				BC1C3DC886B35EB7B6C6A707 /* JSONFileStore.swift in Sources */,
+				F9F97F7AA8FCCFB3B8BBFC18 /* ManualExportFeature.swift in Sources */,
+				19B003709963539106861D63 /* ManualExportView.swift in Sources */,
+				C2023A2EA4702D4A1EE07798 /* MedSyncApp.swift in Sources */,
+				C6BB9AC28A872FAA8FA8409B /* MedicationExportConfiguration.swift in Sources */,
+				899CCAD129434801D8AA9CDE /* MedicationExportPayload.swift in Sources */,
+				E085BADC03B6FBA1FFFF41E2 /* MedicationTriggerClient.swift in Sources */,
+				D1DB407E1049704634312D9E /* SettingsFeature.swift in Sources */,
+				2CAD07D074930C0BD5C8488D /* SettingsView.swift in Sources */,
+				49975513EE62AE5374D3E172 /* UserFacingError.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		4AD17AA9E480C83D6C000D60 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 62624C7009B27C6409492092 /* MedSync */;
+			targetProxy = EF2D20C848832A175FDC84F6 /* PBXContainerItemProxy */;
+		};
+		D842110C2109FDB76E26CDE1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 62624C7009B27C6409492092 /* MedSync */;
+			targetProxy = 972C6CD2186FD631C1FD60A9 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		18E1E6EDCC467D2EF45B9B43 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.placeholder.MedSyncTests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MedSync.app/MedSync";
+				TEST_TARGET_NAME = MedSync;
+			};
+			name = Debug;
+		};
+		24790245B901DE6CF44FE60E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = MedSync;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "MedSync reads medication data from HealthKit to export it to iCloud Drive.";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "MedSync may subscribe to medication updates so a selected automation can run after a taken medication event.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = (
+					UIInterfaceOrientationPortrait,
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.placeholder.MedSync;
+				PRODUCT_NAME = MedSync;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		264727B94B317288916F40B7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.placeholder.MedSyncTests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MedSync.app/MedSync";
+				TEST_TARGET_NAME = MedSync;
+			};
+			name = Release;
+		};
+		40D4C3AD97DB4DC554E6D0C6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.placeholder.MedSyncUITests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = MedSync;
+			};
+			name = Debug;
+		};
+		5EF4246BB6DC04B25A3DCE0F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = MedSync;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "MedSync reads medication data from HealthKit to export it to iCloud Drive.";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "MedSync may subscribe to medication updates so a selected automation can run after a taken medication event.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = (
+					UIInterfaceOrientationPortrait,
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.placeholder.MedSync;
+				PRODUCT_NAME = MedSync;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		86F7FE73E7A914BFBB68519E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_ASSET_PATHS = "\"MedSync/Preview Content\"";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		9E20924145B7C6CC40C58154 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.placeholder.MedSyncUITests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = MedSync;
+			};
+			name = Release;
+		};
+		B6B89930B6EB174B06F14486 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_ASSET_PATHS = "\"MedSync/Preview Content\"";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		90A9CC29A90B58598D4226D9 /* Build configuration list for PBXNativeTarget "MedSyncTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				18E1E6EDCC467D2EF45B9B43 /* Debug */,
+				264727B94B317288916F40B7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		9C6F4A015A53EBB2C80B06D1 /* Build configuration list for PBXProject "MedSync" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				86F7FE73E7A914BFBB68519E /* Debug */,
+				B6B89930B6EB174B06F14486 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		A49678A703AD213A63FE7635 /* Build configuration list for PBXNativeTarget "MedSync" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5EF4246BB6DC04B25A3DCE0F /* Debug */,
+				24790245B901DE6CF44FE60E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		AA869A5474E1743C63F55012 /* Build configuration list for PBXNativeTarget "MedSyncUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				40D4C3AD97DB4DC554E6D0C6 /* Debug */,
+				9E20924145B7C6CC40C58154 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		1A5CA6D62900701D37E6BD36 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-composable-architecture";
+			requirement = {
+				kind = exactVersion;
+				version = 1.25.1;
+			};
+		};
+		31FE0D1A2E8E41B01BD7EE5B /* XCRemoteSwiftPackageReference "swift-perception" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-perception";
+			requirement = {
+				kind = exactVersion;
+				version = 2.0.9;
+			};
+		};
+		906729265C2F796EA10DECC2 /* XCRemoteSwiftPackageReference "swift-case-paths" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-case-paths";
+			requirement = {
+				kind = exactVersion;
+				version = 1.7.2;
+			};
+		};
+		C84AA43EA18D030EC1E96DFF /* XCRemoteSwiftPackageReference "swift-identified-collections" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-identified-collections";
+			requirement = {
+				kind = exactVersion;
+				version = 1.1.1;
+			};
+		};
+		FC69DA451CE84E9097F6D54E /* XCRemoteSwiftPackageReference "swift-dependencies" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-dependencies";
+			requirement = {
+				kind = exactVersion;
+				version = 1.11.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		227870C746F041187B009263 /* PerceptionCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 31FE0D1A2E8E41B01BD7EE5B /* XCRemoteSwiftPackageReference "swift-perception" */;
+			productName = PerceptionCore;
+		};
+		3C8C22773C06FDA2B14B3F4F /* IdentifiedCollections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C84AA43EA18D030EC1E96DFF /* XCRemoteSwiftPackageReference "swift-identified-collections" */;
+			productName = IdentifiedCollections;
+		};
+		7DD2A0746A4057046419C391 /* CasePaths */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 906729265C2F796EA10DECC2 /* XCRemoteSwiftPackageReference "swift-case-paths" */;
+			productName = CasePaths;
+		};
+		8AEC99A7099A49325709D459 /* CasePaths */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 906729265C2F796EA10DECC2 /* XCRemoteSwiftPackageReference "swift-case-paths" */;
+			productName = CasePaths;
+		};
+		9D098F7A0A9F014B072014D5 /* IdentifiedCollections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C84AA43EA18D030EC1E96DFF /* XCRemoteSwiftPackageReference "swift-identified-collections" */;
+			productName = IdentifiedCollections;
+		};
+		A0C8932750AC3E8248778C8F /* PerceptionCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 31FE0D1A2E8E41B01BD7EE5B /* XCRemoteSwiftPackageReference "swift-perception" */;
+			productName = PerceptionCore;
+		};
+		A56F5461A7D873013A7D02F0 /* Perception */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 31FE0D1A2E8E41B01BD7EE5B /* XCRemoteSwiftPackageReference "swift-perception" */;
+			productName = Perception;
+		};
+		ADA5560079A1E4460CB97EA5 /* Dependencies */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FC69DA451CE84E9097F6D54E /* XCRemoteSwiftPackageReference "swift-dependencies" */;
+			productName = Dependencies;
+		};
+		C195E85F4F4B3182FB4B84AA /* Dependencies */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FC69DA451CE84E9097F6D54E /* XCRemoteSwiftPackageReference "swift-dependencies" */;
+			productName = Dependencies;
+		};
+		DBDEF941EFDD7B0B204400BE /* ComposableArchitecture */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1A5CA6D62900701D37E6BD36 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
+			productName = ComposableArchitecture;
+		};
+		ED91D0EE93569C19F890A9EC /* Perception */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 31FE0D1A2E8E41B01BD7EE5B /* XCRemoteSwiftPackageReference "swift-perception" */;
+			productName = Perception;
+		};
+		F084CA91D44D547B3BA35056 /* ComposableArchitecture */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1A5CA6D62900701D37E6BD36 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
+			productName = ComposableArchitecture;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 9DF7CF2017D1CE49C7CA21B8 /* Project object */;
+}
