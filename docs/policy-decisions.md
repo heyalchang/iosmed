@@ -7,6 +7,7 @@
 - Priority: never miss a medication-triggered export.
 - Implication: at-least-once behavior is preferred over at-most-once behavior for medication-trigger automation runs.
 - Follow-on decision: the medication-trigger runtime should move to a two-phase anchor model instead of advancing the committed anchor before export success.
+- Current implementation note: the repository now includes a two-phase pending/committed medication-trigger runtime with processed-event dedupe tracking.
 - Intended shape:
   - persist a pending anchor after observing new qualifying `.taken` medication events
   - run the selected automation

@@ -36,17 +36,65 @@ extension DependencyValues {
 }
 
 enum MedicationTriggerPlanner {
-    static func shouldRunAutomation(
-        previousAnchorData: Data?,
-        newlyTakenEventCount: Int
-    ) -> Bool {
-        previousAnchorData != nil && newlyTakenEventCount > 0
+    enum ObservationAction: Equatable {
+        case retryPending(AutomationRuntimeState.PendingMedicationTrigger)
+        case commitAnchor(Data)
+        case stagePending(AutomationRuntimeState.PendingMedicationTrigger)
+        case noAction
+    }
+
+    static func observationAction(
+        state: AutomationRuntimeState,
+        newAnchorData: Data?,
+        takenEventIDs: [UUID],
+        automation: Automation?,
+        now: Date
+    ) -> ObservationAction {
+        if let pendingMedicationTrigger = state.pendingMedicationTrigger {
+            return .retryPending(pendingMedicationTrigger)
+        }
+
+        guard let newAnchorData else {
+            return .noAction
+        }
+
+        guard state.medicationQueryAnchorData != nil else {
+            return .commitAnchor(newAnchorData)
+        }
+
+        let unprocessedTakenEventIDs = normalizedMedicationEventIDs(
+            takenEventIDs.filter { !state.hasProcessedMedicationTriggerEvent($0) }
+        )
+        guard !unprocessedTakenEventIDs.isEmpty else {
+            return .commitAnchor(newAnchorData)
+        }
+
+        guard let automation else {
+            return .commitAnchor(newAnchorData)
+        }
+
+        return .stagePending(
+            AutomationRuntimeState.PendingMedicationTrigger(
+                automation: automation,
+                queryAnchorData: newAnchorData,
+                triggeringEventIDs: unprocessedTakenEventIDs,
+                createdAt: now
+            )
+        )
     }
 
     static func detailMessage(for newlyTakenEventCount: Int) -> String {
         newlyTakenEventCount == 1
             ? "Triggered after 1 newly logged taken medication event."
             : "Triggered after \(newlyTakenEventCount) newly logged taken medication events."
+    }
+
+    static func detailMessage(for pendingMedicationTrigger: AutomationRuntimeState.PendingMedicationTrigger) -> String {
+        detailMessage(for: pendingMedicationTrigger.triggeringEventIDs.count)
+    }
+
+    private static func normalizedMedicationEventIDs(_ eventIDs: [UUID]) -> [UUID] {
+        Array(Set(eventIDs)).sorted { $0.uuidString < $1.uuidString }
     }
 }
 
@@ -154,37 +202,60 @@ private actor MedicationTriggerService {
     private func processObservedChanges() async throws {
         let runtimeStore = AutomationRuntimeStoreClient.liveValue
         let currentState = try await runtimeStore.load()
+
+        if let pendingMedicationTrigger = currentState.pendingMedicationTrigger {
+            try await runPendingMedicationTrigger(pendingMedicationTrigger, runtimeStore: runtimeStore)
+            return
+        }
+
         let previousAnchorData = currentState.medicationQueryAnchorData
         let previousAnchor = try anchor(from: previousAnchorData)
         let result = try await anchoredDoseEvents(after: previousAnchor)
 
-        guard let newAnchor = result.anchor else {
-            return
-        }
-
-        let anchorData = try archive(anchor: newAnchor)
-        _ = try await runtimeStore.update { state in
-            state.medicationQueryAnchorData = anchorData
-        }
-
-        let takenEvents = result.events.filter { $0.logStatus == .taken }
-        guard MedicationTriggerPlanner.shouldRunAutomation(
-            previousAnchorData: previousAnchorData,
-            newlyTakenEventCount: takenEvents.count
-        ) else {
-            return
-        }
-
         let automations = try await AutomationStoreClient.liveValue.load()
-        guard let automation = automations.first(where: { $0.isEnabled && $0.trigger.medicationFrequency != nil }) else {
+        let selectedAutomation = automations.first(where: { $0.isEnabled && $0.trigger.medicationFrequency != nil })
+        let action = MedicationTriggerPlanner.observationAction(
+            state: currentState,
+            newAnchorData: result.anchor.flatMap { try? archive(anchor: $0) },
+            takenEventIDs: result.events
+                .filter { $0.logStatus == .taken }
+                .map(\.uuid),
+            automation: selectedAutomation,
+            now: Date()
+        )
+
+        switch action {
+        case let .retryPending(pendingMedicationTrigger):
+            try await runPendingMedicationTrigger(pendingMedicationTrigger, runtimeStore: runtimeStore)
+
+        case let .commitAnchor(anchorData):
+            _ = try await runtimeStore.update { state in
+                state.advanceMedicationQueryAnchor(anchorData, referenceDate: Date())
+            }
+
+        case let .stagePending(pendingMedicationTrigger):
+            _ = try await runtimeStore.update { state in
+                state.stageMedicationTrigger(pendingMedicationTrigger)
+            }
+            try await runPendingMedicationTrigger(pendingMedicationTrigger, runtimeStore: runtimeStore)
+
+        case .noAction:
             return
         }
+    }
 
+    private func runPendingMedicationTrigger(
+        _ pendingMedicationTrigger: AutomationRuntimeState.PendingMedicationTrigger,
+        runtimeStore: AutomationRuntimeStoreClient
+    ) async throws {
         _ = try await AutomationExecutionClient.liveValue.runAutomation(
-            automation,
+            pendingMedicationTrigger.automation,
             .medicationTriggerBackgroundDelivery,
-            MedicationTriggerPlanner.detailMessage(for: takenEvents.count)
+            MedicationTriggerPlanner.detailMessage(for: pendingMedicationTrigger)
         )
+        _ = try await runtimeStore.update { state in
+            state.commitPendingMedicationTrigger(processedAt: Date())
+        }
     }
 
     private func anchoredDoseEvents(after anchor: HKQueryAnchor?) async throws -> (
