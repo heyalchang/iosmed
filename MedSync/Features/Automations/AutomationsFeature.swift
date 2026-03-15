@@ -7,6 +7,7 @@ struct AutomationsFeature {
     struct State: Equatable {
         var automations: IdentifiedArrayOf<Automation> = []
         @Presents var editor: AutomationEditorFeature.State?
+        @Presents var detail: AutomationDetailFeature.State?
         var isLoading = false
         var isRunningAll = false
         var statusMessage: String?
@@ -15,6 +16,7 @@ struct AutomationsFeature {
     enum Action: Equatable {
         case task
         case automationsResponse(Result<[Automation], UserFacingError>)
+        case automationTapped(UUID)
         case addButtonTapped
         case editButtonTapped(UUID)
         case delete(IndexSet)
@@ -22,6 +24,7 @@ struct AutomationsFeature {
         case runNowButtonTapped(UUID)
         case runAllButtonTapped
         case runAllCompleted(successCount: Int, failureCount: Int)
+        case detail(PresentationAction<AutomationDetailFeature.Action>)
         case editor(PresentationAction<AutomationEditorFeature.Action>)
         case saveAutomationResponse(Result<[Automation], UserFacingError>, savedAutomation: Automation, actionLabel: String)
         case deleteAutomationResponse(Result<[Automation], UserFacingError>)
@@ -30,8 +33,9 @@ struct AutomationsFeature {
 
     @Dependency(\.automationStore) var automationStore
     @Dependency(\.activityLogStore) var activityLogStore
-    @Dependency(\.exportRunner) var exportRunner
+    @Dependency(\.automationExecution) var automationExecution
     @Dependency(\.medicationTriggerClient) var medicationTriggerClient
+    @Dependency(\.automationScheduler) var automationScheduler
     @Dependency(\.date.now) var now
 
     var body: some ReducerOf<Self> {
@@ -58,6 +62,11 @@ struct AutomationsFeature {
                 state.statusMessage = error.message
                 return .none
 
+            case let .automationTapped(id):
+                guard let automation = state.automations[id: id] else { return .none }
+                state.detail = AutomationDetailFeature.State(automation: automation)
+                return .none
+
             case .addButtonTapped:
                 state.editor = AutomationEditorFeature.State(draft: AutomationDraft())
                 return .none
@@ -76,6 +85,7 @@ struct AutomationsFeature {
                         let automations = try await automationStore.delete(id)
                         try await activityLogStore.append(.automationLifecycle(action: "Deleted automation", automation: automation, timestamp: now))
                         await medicationTriggerClient.syncAutomationSelection(automations)
+                        await automationScheduler.syncAutomations(automations)
                         await send(.deleteAutomationResponse(.success(automations)))
                     } catch {
                         await send(.deleteAutomationResponse(.failure(UserFacingError(error.localizedDescription))))
@@ -87,6 +97,9 @@ struct AutomationsFeature {
                 automation.isEnabled = isEnabled
                 automation.updatedAt = now
                 state.automations[id: id] = automation
+                if state.detail?.automation.id == automation.id {
+                    state.detail?.automation = automation
+                }
                 return persist(automation: automation, actionLabel: "Updated automation")
 
             case let .runNowButtonTapped(id):
@@ -94,32 +107,22 @@ struct AutomationsFeature {
                 return runAutomation(automation, triggerReason: .runNow)
 
             case .runAllButtonTapped:
-                state.isRunningAll = true
                 let enabledAutomations = state.automations.elements.filter(\.isEnabled)
-                return .run { [enabledAutomations, now] send in
+                guard !enabledAutomations.isEmpty else {
+                    state.statusMessage = "No enabled automations are available to run."
+                    return .none
+                }
+
+                state.isRunningAll = true
+                return .run { [enabledAutomations] send in
                     var successCount = 0
                     var failureCount = 0
                     for automation in enabledAutomations {
                         do {
-                            let summary = try await exportRunner.run(.automation(automation, triggerReason: .runAll))
+                            _ = try await automationExecution.runAutomation(automation, .runAll, nil)
                             successCount += 1
-                            try? await activityLogStore.append(.run(summary: summary, timestamp: now))
                         } catch {
                             failureCount += 1
-                            let range = automation.exportOptions.dateRange.resolved(now: now)
-                            let summary = ExportRunSummary(
-                                filename: "",
-                                relativePath: "",
-                                recordCount: 0,
-                                destination: .iCloudDrive,
-                                format: automation.exportOptions.format,
-                                dateRangePreset: automation.exportOptions.dateRange.preset,
-                                dateRange: range,
-                                triggerReason: .runAll,
-                                automationID: automation.id,
-                                automationName: automation.name
-                            )
-                            try? await activityLogStore.append(.run(summary: summary, status: .failure, errorDetails: error.localizedDescription, timestamp: now))
                         }
                     }
                     await send(.runAllCompleted(successCount: successCount, failureCount: failureCount))
@@ -153,8 +156,14 @@ struct AutomationsFeature {
             case .editor:
                 return .none
 
+            case .detail:
+                return .none
+
             case let .saveAutomationResponse(.success(automations), savedAutomation, actionLabel):
                 state.automations = IdentifiedArray(uniqueElements: automations)
+                if state.detail?.automation.id == savedAutomation.id {
+                    state.detail?.automation = savedAutomation
+                }
                 state.statusMessage = "\(actionLabel): \(savedAutomation.name)"
                 return .none
 
@@ -163,7 +172,11 @@ struct AutomationsFeature {
                 return .none
 
             case let .deleteAutomationResponse(.success(automations)):
+                let deletedDetailID = state.detail?.automation.id
                 state.automations = IdentifiedArray(uniqueElements: automations)
+                if let deletedDetailID, !automations.contains(where: { $0.id == deletedDetailID }) {
+                    state.detail = nil
+                }
                 state.statusMessage = "Automation deleted."
                 return .none
 
@@ -183,6 +196,9 @@ struct AutomationsFeature {
         .ifLet(\.$editor, action: \.editor) {
             AutomationEditorFeature()
         }
+        .ifLet(\.$detail, action: \.detail) {
+            AutomationDetailFeature()
+        }
     }
 
     private func persist(automation: Automation, actionLabel: String) -> Effect<Action> {
@@ -191,6 +207,7 @@ struct AutomationsFeature {
                 let automations = try await automationStore.upsert(automation)
                 try await activityLogStore.append(.automationLifecycle(action: actionLabel, automation: automation, timestamp: now))
                 await medicationTriggerClient.syncAutomationSelection(automations)
+                await automationScheduler.syncAutomations(automations)
                 await send(.saveAutomationResponse(.success(automations), savedAutomation: automation, actionLabel: actionLabel))
             } catch {
                 await send(.saveAutomationResponse(.failure(UserFacingError(error.localizedDescription)), savedAutomation: automation, actionLabel: actionLabel))
@@ -199,26 +216,11 @@ struct AutomationsFeature {
     }
 
     private func runAutomation(_ automation: Automation, triggerReason: TriggerReason) -> Effect<Action> {
-        .run { [automation, triggerReason, now] send in
+        .run { [automation, triggerReason] send in
             do {
-                let summary = try await exportRunner.run(.automation(automation, triggerReason: triggerReason))
-                try await activityLogStore.append(.run(summary: summary, timestamp: now))
+                let summary = try await automationExecution.runAutomation(automation, triggerReason, nil)
                 await send(.runResponse(.success(summary)))
             } catch {
-                let range = automation.exportOptions.dateRange.resolved(now: now)
-                let summary = ExportRunSummary(
-                    filename: "",
-                    relativePath: "",
-                    recordCount: 0,
-                    destination: .iCloudDrive,
-                    format: automation.exportOptions.format,
-                    dateRangePreset: automation.exportOptions.dateRange.preset,
-                    dateRange: range,
-                    triggerReason: triggerReason,
-                    automationID: automation.id,
-                    automationName: automation.name
-                )
-                try? await activityLogStore.append(.run(summary: summary, status: .failure, errorDetails: error.localizedDescription, timestamp: now))
                 await send(.runResponse(.failure(UserFacingError(error.localizedDescription))))
             }
         }

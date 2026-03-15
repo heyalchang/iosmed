@@ -22,9 +22,7 @@ final class ManualExportFeatureTests: XCTestCase {
         let store = TestStore(initialState: ManualExportFeature.State()) {
             ManualExportFeature()
         } withDependencies: {
-            $0.exportRunner.run = { _ in summary }
-            $0.activityLogStore.append = { _ in }
-            $0.date.now = now
+            $0.automationExecution.runManualExport = { _ in summary }
         }
 
         await store.send(.exportButtonTapped) {
@@ -37,4 +35,3 @@ final class ManualExportFeatureTests: XCTestCase {
         }
     }
 }
-

@@ -11,6 +11,7 @@ final class MedicationExportSerializationTests: XCTestCase {
         XCTAssertEqual(decoded.schemaVersion, 1)
         XCTAssertEqual(decoded.exportType, "medications")
         XCTAssertEqual(decoded.data.medications.count, 1)
+        XCTAssertEqual(decoded.data.medications.first?.medication.conceptIdentifier?.domain, "medication")
         XCTAssertEqual(decoded.data.medications.first?.medication.displayText, "Tirzepatide 7.5mg/0.5mL Solution for injection")
         XCTAssertEqual(decoded.data.medications.first?.logStatus, .taken)
     }
@@ -22,9 +23,10 @@ final class MedicationExportSerializationTests: XCTestCase {
         let string = String(decoding: data, as: UTF8.self)
         let lines = string.split(separator: "\n", omittingEmptySubsequences: false).map(String.init)
 
-        XCTAssertEqual(lines.first, "id,startDate,endDate,logStatus,scheduleType,scheduledDate,doseQuantity,scheduledDoseQuantity,unit,displayText,nickname,hasSchedule,isArchived,generalForm,codings")
+        XCTAssertEqual(lines.first, "id,startDate,endDate,logStatus,scheduleType,scheduledDate,doseQuantity,scheduledDoseQuantity,unit,conceptIdentifierDomain,conceptIdentifierArchivedValue,displayText,nickname,hasSchedule,isArchived,generalForm,codings")
         XCTAssertEqual(lines.count, 2)
         XCTAssertTrue(lines[1].contains("\"taken\""))
+        XCTAssertTrue(lines[1].contains("\"medication\""))
         XCTAssertTrue(lines[1].contains("\"injection\""))
         XCTAssertTrue(lines[1].contains("rxnorm"))
     }
@@ -42,6 +44,10 @@ final class MedicationExportSerializationTests: XCTestCase {
             scheduledDoseQuantity: 0.5,
             unit: "mL",
             medication: MedicationIdentity(
+                conceptIdentifier: MedicationConceptIdentifier(
+                    domain: "medication",
+                    archivedValue: "opaque-medication-id"
+                ),
                 displayText: "Tirzepatide 7.5mg/0.5mL Solution for injection",
                 nickname: "Weekly shot",
                 hasSchedule: true,

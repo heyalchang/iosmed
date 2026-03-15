@@ -20,7 +20,13 @@ struct MedicationCoding: Codable, Equatable, Sendable {
     var code: String
 }
 
+struct MedicationConceptIdentifier: Codable, Equatable, Sendable {
+    var domain: String
+    var archivedValue: String?
+}
+
 struct MedicationIdentity: Codable, Equatable, Sendable {
+    var conceptIdentifier: MedicationConceptIdentifier?
     var displayText: String
     var nickname: String?
     var hasSchedule: Bool
@@ -91,6 +97,8 @@ enum MedicationExportSerializer {
             "doseQuantity",
             "scheduledDoseQuantity",
             "unit",
+            "conceptIdentifierDomain",
+            "conceptIdentifierArchivedValue",
             "displayText",
             "nickname",
             "hasSchedule",
@@ -110,6 +118,8 @@ enum MedicationExportSerializer {
                 escape(string(from: record.doseQuantity)),
                 escape(string(from: record.scheduledDoseQuantity)),
                 escape(record.unit),
+                escape(record.medication.conceptIdentifier?.domain ?? ""),
+                escape(record.medication.conceptIdentifier?.archivedValue ?? ""),
                 escape(record.medication.displayText),
                 escape(record.medication.nickname ?? ""),
                 escape(String(record.medication.hasSchedule)),

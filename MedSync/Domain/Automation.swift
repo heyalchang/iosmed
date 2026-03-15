@@ -76,6 +76,11 @@ enum AutomationTrigger: Codable, Equatable, Sendable {
         guard case let .medicationTaken(frequency) = self else { return nil }
         return frequency
     }
+
+    var scheduledCadence: ScheduledCadence? {
+        guard case let .schedule(cadence) = self else { return nil }
+        return cadence
+    }
 }
 
 struct Automation: Codable, Equatable, Sendable, Identifiable {
@@ -171,4 +176,3 @@ struct AutomationDraft: Equatable, Sendable {
         )
     }
 }
-

@@ -48,18 +48,11 @@ targets:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.placeholder.MedSync
         PRODUCT_NAME: MedSync
-        GENERATE_INFOPLIST_FILE: YES
-        INFOPLIST_KEY_CFBundleDisplayName: MedSync
-        INFOPLIST_KEY_LSApplicationCategoryType: public.app-category.healthcare-fitness
-        INFOPLIST_KEY_NSHealthShareUsageDescription: MedSync reads medication data from HealthKit to export it to iCloud Drive.
-        INFOPLIST_KEY_NSHealthUpdateUsageDescription: MedSync may subscribe to medication updates so a selected automation can run after a taken medication event.
-        INFOPLIST_KEY_UIApplicationSceneManifest_Generation: YES
-        INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents: YES
-        INFOPLIST_KEY_UILaunchScreen_Generation: YES
-        INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone:
-          - UIInterfaceOrientationPortrait
+        GENERATE_INFOPLIST_FILE: NO
+        INFOPLIST_FILE: MedSync/Resources/Info.plist
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
         CODE_SIGN_STYLE: Automatic
+        CODE_SIGN_ENTITLEMENTS: MedSync/Resources/MedSync.entitlements
   MedSyncTests:
     type: bundle.unit-test
     platform: iOS
