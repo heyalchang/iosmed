@@ -128,29 +128,19 @@ Phase 1 is a local-only native iOS app for exporting Apple Health medication dat
 ### Implemented but intentionally transitional
 
 - Automations, activity logs, and runtime state currently use JSON file stores behind dependency clients.
-- This is working and testable, but SwiftData is the agreed long-term persistence direction.
+- This is working and testable, and is acceptable for Phase 1.
 
 ## Locked Decisions Since The Initial Build
 
 - Medication-trigger reliability should favor not missing exports over avoiding duplicates.
 - The medication-trigger runtime now uses a two-phase anchor flow with pending trigger state plus processed-event dedupe.
-- SwiftData is the agreed long-term persistence layer for automations, structured activity logs, and runtime state, still hidden behind dependency clients.
+- SwiftData remains an agreed long-term persistence direction, but it is explicitly deferred beyond Phase 1.
 
 ## Known Gaps / What Is Left
 
 ### Remaining work required for a strong Phase 1 completion
 
-#### 1. Migrate persistence to SwiftData behind dependency clients
-
-Scope:
-
-- automations
-- activity logs
-- automation runtime state
-
-Do not let reducers or views talk to SwiftData directly.
-
-#### 2. Expand persistence and runtime tests
+#### 1. Expand persistence and runtime tests
 
 Highest-value additions:
 
@@ -159,7 +149,7 @@ Highest-value additions:
 - execution-client tests for success and failure logging paths
 - tests around notification intent and runtime side effects where practical
 
-#### 3. Device-only Phase 1 validation pass
+#### 2. Device-only Phase 1 validation pass
 
 Narrow device validation still needed for:
 
@@ -171,7 +161,7 @@ Narrow device validation still needed for:
 - local notifications
 - Shortcuts/App Intents from the system UI
 
-#### 4. Final signing/iCloud wiring when ready
+#### 3. Final signing/iCloud wiring when ready
 
 By design, Phase 1 did not block on real team IDs or production iCloud identifiers.
 
@@ -186,7 +176,7 @@ Before broader device validation or distribution, replace the placeholder values
 
 - clean up direct `.liveValue` usage in runtime entry points and service actors
 - polish minor notification-copy/UI nits
-- improve query efficiency for scoped history once persistence moves to SwiftData
+- improve query efficiency for scoped history if JSON-backed persistence becomes limiting in real use
 - decide whether pending medication triggers should always run their staged automation snapshot if the user later edits or disables that automation before retry
 
 ## Recommended Milestone Plan From Here
@@ -216,15 +206,14 @@ Status: complete on the current branch
 
 ### Milestone 3: Persistence convergence
 
-Status: not started
+Status: deferred beyond Phase 1
 
-- migrate JSON-backed persistence to SwiftData-backed dependency clients
-- preserve testability and structured-query behavior
-- add persistence tests
+- keep JSON-backed dependency clients unless real usage proves them insufficient
+- revisit SwiftData in a later phase if richer queries, retention controls, or migration needs justify the complexity
 
 ### Milestone 4: Device readiness
 
-Status: partially started, not complete
+Status: next active milestone
 
 - use real signing/iCloud identifiers when needed
 - validate on physical device
@@ -232,12 +221,11 @@ Status: partially started, not complete
 
 ## Immediate TODO List
 
-1. Migrate automations, activity logs, and runtime state to SwiftData behind dependency clients.
-2. Add persistence tests for the new storage layer and migration behavior.
-3. Add execution-path tests around shared logging/notification side effects where practical.
-4. Run the narrow real-device validation pass.
-5. Update placeholder signing and iCloud values when ready for device/distribution work.
-6. Decide whether pending medication triggers should always run their staged automation snapshot if the user later edits or disables that automation before retry.
+1. Add persistence tests for the current JSON-backed storage layer and migration behavior.
+2. Add execution-path tests around shared logging/notification side effects where practical.
+3. Run the narrow real-device validation pass.
+4. Update placeholder signing and iCloud values when ready for device/distribution work.
+5. Decide whether pending medication triggers should always run their staged automation snapshot if the user later edits or disables that automation before retry.
 
 ## Suggested Handoff Guidance For A Fresh Agent Or Engineer
 
@@ -248,9 +236,9 @@ Tell the next person:
 - use `docs/healthautoexport-spec.md` only as orientation/reference
 - treat `docs/policy-decisions.md` as locked decisions
 - do not broaden scope beyond medications + iCloud Drive
-- prioritize persistence convergence and device validation before polish
+- prioritize device validation before persistence rewrites or polish
 - keep all Apple framework and persistence access behind dependency clients
 
 ## Recommended First Task For The Next Session
 
-Start the SwiftData migration behind dependency clients, beginning with a persistence design that preserves the current structured query surfaces and keeps reducer tests independent of the framework.
+Get the app onto a physical device, validate the real HealthKit/iCloud/background-delivery path, and fix the concrete issues that show up there before considering a persistence rewrite.

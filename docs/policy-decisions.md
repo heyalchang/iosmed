@@ -19,4 +19,5 @@
 - Direction: SwiftData is the agreed long-term persistence layer for structured local data in this app.
 - Scope: automations, activity logs, and runtime state should ultimately live behind dependency clients backed by SwiftData.
 - Constraint: reducers must continue to interact through dependency clients so TCA features remain testable.
-- Transitional note: the current JSON file stores are acceptable as an implementation step, but they are not the intended final persistence approach.
+- Phase decision: do not make SwiftData migration a Phase 1 blocker.
+- Transitional note: the current JSON file stores are acceptable for Phase 1 as long as they remain behind dependency clients and support the required structured log/runtime behavior.
