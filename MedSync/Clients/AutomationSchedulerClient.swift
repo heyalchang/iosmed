@@ -8,7 +8,29 @@ import os
 #endif
 
 enum AutomationSchedulerConfiguration {
-    static let refreshTaskIdentifier = "com.placeholder.MedSync.automation-refresh"
+    static let fallbackSubsystem = "MedSync"
+
+    static var currentRefreshTaskIdentifier: String {
+        refreshTaskIdentifier(bundleIdentifier: Bundle.main.bundleIdentifier)
+    }
+
+    static var currentLoggerSubsystem: String {
+        loggerSubsystem(bundleIdentifier: Bundle.main.bundleIdentifier)
+    }
+
+    static func refreshTaskIdentifier(bundleIdentifier: String?) -> String {
+        guard let bundleIdentifier, !bundleIdentifier.isEmpty else {
+            return "\(fallbackSubsystem).automation-refresh"
+        }
+        return "\(bundleIdentifier).automation-refresh"
+    }
+
+    static func loggerSubsystem(bundleIdentifier: String?) -> String {
+        guard let bundleIdentifier, !bundleIdentifier.isEmpty else {
+            return fallbackSubsystem
+        }
+        return bundleIdentifier
+    }
 }
 
 struct AutomationSchedulerClient: Sendable {
@@ -49,7 +71,10 @@ extension DependencyValues {
 
 private actor AutomationSchedulerService {
     #if canImport(os)
-    private let logger = Logger(subsystem: "com.placeholder.MedSync", category: "AutomationScheduler")
+    private let logger = Logger(
+        subsystem: AutomationSchedulerConfiguration.currentLoggerSubsystem,
+        category: "AutomationScheduler"
+    )
     #endif
 
     func syncAutomations(_ automations: [Automation]) async {
@@ -106,7 +131,8 @@ private actor AutomationSchedulerService {
 
     private func scheduleNextRefresh(for automations: [Automation], runtimeState: AutomationRuntimeState) async {
         #if canImport(BackgroundTasks)
-        BGTaskScheduler.shared.cancel(taskRequestWithIdentifier: AutomationSchedulerConfiguration.refreshTaskIdentifier)
+        let refreshTaskIdentifier = AutomationSchedulerConfiguration.currentRefreshTaskIdentifier
+        BGTaskScheduler.shared.cancel(taskRequestWithIdentifier: refreshTaskIdentifier)
 
         guard let nextRefreshDate = AutomationSchedulePlanner.nextRefreshDate(
             from: automations,
@@ -115,7 +141,7 @@ private actor AutomationSchedulerService {
             return
         }
 
-        let request = BGAppRefreshTaskRequest(identifier: AutomationSchedulerConfiguration.refreshTaskIdentifier)
+        let request = BGAppRefreshTaskRequest(identifier: refreshTaskIdentifier)
         request.earliestBeginDate = max(nextRefreshDate, Date())
         do {
             try BGTaskScheduler.shared.submit(request)

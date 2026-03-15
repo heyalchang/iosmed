@@ -161,6 +161,8 @@ Narrow device validation still needed for:
 - local notifications
 - Shortcuts/App Intents from the system UI
 
+Use `docs/device-validation.md` as the explicit checklist for that pass.
+
 #### 3. Final signing/iCloud wiring when ready
 
 By design, Phase 1 did not block on real team IDs or production iCloud identifiers.

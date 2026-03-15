@@ -25,7 +25,7 @@ struct MedSyncApp: App {
                 await AppBootstrap.run()
             }
         }
-        .backgroundTask(.appRefresh(AutomationSchedulerConfiguration.refreshTaskIdentifier)) {
+        .backgroundTask(.appRefresh(AutomationSchedulerConfiguration.currentRefreshTaskIdentifier)) {
             await AutomationSchedulerClient.liveValue.handleAppRefresh()
         }
     }

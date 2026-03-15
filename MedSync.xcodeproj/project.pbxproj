@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0104AF64D55BEC467A079579 /* PerceptionCore in Frameworks */ = {isa = PBXBuildFile; productRef = A0C8932750AC3E8248778C8F /* PerceptionCore */; };
+		07EE92B045474523E1C75AE0 /* MedicationTriggerRuntimeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 298AE4456470E4259C04AF1B /* MedicationTriggerRuntimeTests.swift */; };
 		0AF8709D5889F24E83F55FD7 /* AutomationStoreClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8759A9104054AD8A086375E /* AutomationStoreClient.swift */; };
 		11F78DB0CACF570323664AD4 /* HealthKitClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A8E54658B78490253EA071 /* HealthKitClient.swift */; };
 		151E45B57727878D42D5F106 /* CasePaths in Frameworks */ = {isa = PBXBuildFile; productRef = 7DD2A0746A4057046419C391 /* CasePaths */; };
@@ -34,11 +35,13 @@
 		8EE79098446D57BD18775C57 /* AutomationEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F654F98A9710B34331D872 /* AutomationEditorView.swift */; };
 		93435669C3C8E3C2A378A598 /* ExportFileLayoutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081BB8DF7AD57115921E2725 /* ExportFileLayoutTests.swift */; };
 		997BB44966B000323F33293F /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C07C95C6E937379FF59A3E6 /* AppView.swift */; };
+		9D59932E983A9D3123FED7FF /* AutomationRuntimeStateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C3CB4BFC2546288825C4F0 /* AutomationRuntimeStateTests.swift */; };
 		A1CF5F756A87E4D713E74FDE /* AutomationExecutionClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8F66965504CD3B7CB8F2A6 /* AutomationExecutionClient.swift */; };
 		A1DDD600500A688B8ED65848 /* ICloudDriveClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B4C34A30FECFFF4A1015FF /* ICloudDriveClient.swift */; };
 		A35D7383F741560948C2517C /* MedSyncUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3BB8C7FCF06FD641BF2F14E /* MedSyncUITests.swift */; };
 		AA57B2DDAD04EAF3A149AA93 /* Dependencies in Frameworks */ = {isa = PBXBuildFile; productRef = C195E85F4F4B3182FB4B84AA /* Dependencies */; };
 		AC3C888C9053AC9C62D2E62F /* AutomationsFeatureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFFBA11C93D28490F8E3079 /* AutomationsFeatureTests.swift */; };
+		AE0623FFB7B3043D19F5F0E1 /* AutomationSchedulerConfigurationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36F7F4E18E9F4EC972279E0 /* AutomationSchedulerConfigurationTests.swift */; };
 		B0BC4DC7E9630A00AA9CF3A7 /* PerceptionCore in Frameworks */ = {isa = PBXBuildFile; productRef = 227870C746F041187B009263 /* PerceptionCore */; };
 		B188156D4AE6EC892F2A61E7 /* AutomationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A5E5C0878BA82F44FB5372 /* AutomationsView.swift */; };
 		B251A506CB5F1B116577BB52 /* ManualExportFeatureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E0C31CE4D57360C1FF67A5 /* ManualExportFeatureTests.swift */; };
@@ -99,7 +102,9 @@
 		242976BA3CD13499A3B263E6 /* AutomationDetailFeatureTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutomationDetailFeatureTests.swift; sourceTree = "<group>"; };
 		25AA8C4934BEF2A72F7AD0E0 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2935990E96D4069817033E2D /* AppRuntime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRuntime.swift; sourceTree = "<group>"; };
+		298AE4456470E4259C04AF1B /* MedicationTriggerRuntimeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicationTriggerRuntimeTests.swift; sourceTree = "<group>"; };
 		2B627D04DED6D1C3439C8DA0 /* AutomationsFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutomationsFeature.swift; sourceTree = "<group>"; };
+		32C3CB4BFC2546288825C4F0 /* AutomationRuntimeStateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutomationRuntimeStateTests.swift; sourceTree = "<group>"; };
 		348854C2AFA2A6DDE91363AF /* AutomationDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutomationDetailView.swift; sourceTree = "<group>"; };
 		372E6AD76529B1B732D0D935 /* ActivityLogEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityLogEntry.swift; sourceTree = "<group>"; };
 		3F3DB474269C0192F094C3D1 /* MedSync.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MedSync.entitlements; sourceTree = "<group>"; };
@@ -139,6 +144,7 @@
 		E8759A9104054AD8A086375E /* AutomationStoreClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutomationStoreClient.swift; sourceTree = "<group>"; };
 		EEE8E17345A2CCEA990C9CCA /* AutomationDetailFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutomationDetailFeature.swift; sourceTree = "<group>"; };
 		F1DE8C86E739353F02292906 /* MedSyncUITests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = MedSyncUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F36F7F4E18E9F4EC972279E0 /* AutomationSchedulerConfigurationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutomationSchedulerConfigurationTests.swift; sourceTree = "<group>"; };
 		FA682C1FA208D1424AD34496 /* AppFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFeature.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -287,10 +293,13 @@
 		78682960529AB133210D0E68 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				32C3CB4BFC2546288825C4F0 /* AutomationRuntimeStateTests.swift */,
 				C09D6AA0D742B8C403CED462 /* AutomationSchedulePlannerTests.swift */,
+				F36F7F4E18E9F4EC972279E0 /* AutomationSchedulerConfigurationTests.swift */,
 				081BB8DF7AD57115921E2725 /* ExportFileLayoutTests.swift */,
 				6F2A09D06A557AB91867830D /* MedicationExportSerializationTests.swift */,
 				E533A5FBCB9CA18F938963FC /* MedicationTriggerPlannerTests.swift */,
+				298AE4456470E4259C04AF1B /* MedicationTriggerRuntimeTests.swift */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -520,12 +529,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				E8F61029A764860A1F4D216B /* AutomationDetailFeatureTests.swift in Sources */,
+				9D59932E983A9D3123FED7FF /* AutomationRuntimeStateTests.swift in Sources */,
 				2C5AEB67C3541862389A571C /* AutomationSchedulePlannerTests.swift in Sources */,
+				AE0623FFB7B3043D19F5F0E1 /* AutomationSchedulerConfigurationTests.swift in Sources */,
 				AC3C888C9053AC9C62D2E62F /* AutomationsFeatureTests.swift in Sources */,
 				93435669C3C8E3C2A378A598 /* ExportFileLayoutTests.swift in Sources */,
 				B251A506CB5F1B116577BB52 /* ManualExportFeatureTests.swift in Sources */,
 				E00A81E92A691589F5DEA586 /* MedicationExportSerializationTests.swift in Sources */,
 				FD267BFC9954B7CD972669E6 /* MedicationTriggerPlannerTests.swift in Sources */,
+				07EE92B045474523E1C75AE0 /* MedicationTriggerRuntimeTests.swift in Sources */,
 				305631222B720F555D3649EF /* SettingsFeatureTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -601,7 +613,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.placeholder.MedSyncTests;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(MEDSYNC_BASE_BUNDLE_IDENTIFIER)Tests";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MedSync.app/MedSync";
@@ -623,7 +635,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.placeholder.MedSync;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(MEDSYNC_BASE_BUNDLE_IDENTIFIER)";
 				PRODUCT_NAME = MedSync;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -641,7 +653,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.placeholder.MedSyncTests;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(MEDSYNC_BASE_BUNDLE_IDENTIFIER)Tests";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MedSync.app/MedSync";
@@ -660,7 +672,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.placeholder.MedSyncUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(MEDSYNC_BASE_BUNDLE_IDENTIFIER)UITests";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = MedSync;
@@ -681,7 +693,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.placeholder.MedSync;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(MEDSYNC_BASE_BUNDLE_IDENTIFIER)";
 				PRODUCT_NAME = MedSync;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -743,6 +755,9 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				MARKETING_VERSION = 1.0;
+				MEDSYNC_BASE_BUNDLE_IDENTIFIER = com.placeholder.MedSync;
+				MEDSYNC_BG_TASK_IDENTIFIER = "$(MEDSYNC_BASE_BUNDLE_IDENTIFIER).automation-refresh";
+				MEDSYNC_ICLOUD_CONTAINER_IDENTIFIER = "iCloud.$(MEDSYNC_BASE_BUNDLE_IDENTIFIER)";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -766,7 +781,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.placeholder.MedSyncUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(MEDSYNC_BASE_BUNDLE_IDENTIFIER)UITests";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = MedSync;
@@ -822,6 +837,9 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				MARKETING_VERSION = 1.0;
+				MEDSYNC_BASE_BUNDLE_IDENTIFIER = com.placeholder.MedSync;
+				MEDSYNC_BG_TASK_IDENTIFIER = "$(MEDSYNC_BASE_BUNDLE_IDENTIFIER).automation-refresh";
+				MEDSYNC_ICLOUD_CONTAINER_IDENTIFIER = "iCloud.$(MEDSYNC_BASE_BUNDLE_IDENTIFIER)";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";

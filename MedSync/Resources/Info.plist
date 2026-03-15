@@ -30,7 +30,7 @@
 	<string>MedSync may subscribe to medication updates so a selected automation can run after a taken medication event.</string>
 	<key>BGTaskSchedulerPermittedIdentifiers</key>
 	<array>
-		<string>com.placeholder.MedSync.automation-refresh</string>
+		<string>$(MEDSYNC_BG_TASK_IDENTIFIER)</string>
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>

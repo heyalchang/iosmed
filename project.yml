@@ -9,6 +9,9 @@ settings:
     MARKETING_VERSION: 1.0
     CURRENT_PROJECT_VERSION: 1
     DEVELOPMENT_ASSET_PATHS: "\"MedSync/Preview Content\""
+    MEDSYNC_BASE_BUNDLE_IDENTIFIER: com.placeholder.MedSync
+    MEDSYNC_BG_TASK_IDENTIFIER: $(MEDSYNC_BASE_BUNDLE_IDENTIFIER).automation-refresh
+    MEDSYNC_ICLOUD_CONTAINER_IDENTIFIER: iCloud.$(MEDSYNC_BASE_BUNDLE_IDENTIFIER)
 packages:
   ComposableArchitecture:
     url: https://github.com/pointfreeco/swift-composable-architecture
@@ -46,7 +49,7 @@ targets:
         product: PerceptionCore
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: com.placeholder.MedSync
+        PRODUCT_BUNDLE_IDENTIFIER: $(MEDSYNC_BASE_BUNDLE_IDENTIFIER)
         PRODUCT_NAME: MedSync
         GENERATE_INFOPLIST_FILE: NO
         INFOPLIST_FILE: MedSync/Resources/Info.plist
@@ -70,7 +73,7 @@ targets:
         product: PerceptionCore
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: com.placeholder.MedSyncTests
+        PRODUCT_BUNDLE_IDENTIFIER: $(MEDSYNC_BASE_BUNDLE_IDENTIFIER)Tests
         GENERATE_INFOPLIST_FILE: YES
         TEST_TARGET_NAME: MedSync
         TEST_HOST: "$(BUILT_PRODUCTS_DIR)/MedSync.app/MedSync"
@@ -85,7 +88,7 @@ targets:
       - target: MedSync
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: com.placeholder.MedSyncUITests
+        PRODUCT_BUNDLE_IDENTIFIER: $(MEDSYNC_BASE_BUNDLE_IDENTIFIER)UITests
         GENERATE_INFOPLIST_FILE: YES
         TEST_TARGET_NAME: MedSync
 schemes:
