@@ -62,7 +62,7 @@ enum MedicationTriggerPlanner {
             return .commitAnchor(newAnchorData)
         }
 
-        let unprocessedTakenEventIDs = normalizedMedicationEventIDs(
+        let unprocessedTakenEventIDs = normalizedMedicationTriggerEventIDs(
             takenEventIDs.filter { !state.hasProcessedMedicationTriggerEvent($0) }
         )
         guard !unprocessedTakenEventIDs.isEmpty else {
@@ -92,9 +92,23 @@ enum MedicationTriggerPlanner {
     static func detailMessage(for pendingMedicationTrigger: AutomationRuntimeState.PendingMedicationTrigger) -> String {
         detailMessage(for: pendingMedicationTrigger.triggeringEventIDs.count)
     }
+}
 
-    private static func normalizedMedicationEventIDs(_ eventIDs: [UUID]) -> [UUID] {
-        Array(Set(eventIDs)).sorted { $0.uuidString < $1.uuidString }
+enum MedicationTriggerRuntime {
+    static func runPendingMedicationTrigger(
+        _ pendingMedicationTrigger: AutomationRuntimeState.PendingMedicationTrigger,
+        runtimeStore: AutomationRuntimeStoreClient,
+        automationExecution: AutomationExecutionClient,
+        processedAt: Date
+    ) async throws {
+        _ = try await automationExecution.runAutomation(
+            pendingMedicationTrigger.automation,
+            .medicationTriggerBackgroundDelivery,
+            MedicationTriggerPlanner.detailMessage(for: pendingMedicationTrigger)
+        )
+        _ = try await runtimeStore.update { state in
+            state.commitPendingMedicationTrigger(processedAt: processedAt)
+        }
     }
 }
 
@@ -112,6 +126,12 @@ private final class ObserverQueryCompletionHandlerBox: @unchecked Sendable {
 }
 
 private actor MedicationTriggerService {
+    @Dependency(\.automationExecution) private var automationExecution
+    @Dependency(\.automationRuntimeStore) private var automationRuntimeStore
+    @Dependency(\.automationStore) private var automationStore
+    @Dependency(\.date.now) private var currentDate
+    @Dependency(\.healthKitClient) private var healthKitClient
+
     private let healthStore = HKHealthStore()
     private var observerQuery: HKObserverQuery?
     private var hasStarted = false
@@ -141,7 +161,7 @@ private actor MedicationTriggerService {
             .trigger
             .medicationFrequency
 
-        let configured = (try? await HealthKitClient.liveValue.configureMedicationBackgroundDelivery(frequency)) != nil
+        let configured = (try? await healthKitClient.configureMedicationBackgroundDelivery(frequency)) != nil
 
         guard hasStarted, frequency != nil, configured else {
             return
@@ -200,11 +220,17 @@ private actor MedicationTriggerService {
     }
 
     private func processObservedChanges() async throws {
-        let runtimeStore = AutomationRuntimeStoreClient.liveValue
+        let runtimeStore = automationRuntimeStore
+        let processedAt = currentDate
         let currentState = try await runtimeStore.load()
 
         if let pendingMedicationTrigger = currentState.pendingMedicationTrigger {
-            try await runPendingMedicationTrigger(pendingMedicationTrigger, runtimeStore: runtimeStore)
+            try await MedicationTriggerRuntime.runPendingMedicationTrigger(
+                pendingMedicationTrigger,
+                runtimeStore: runtimeStore,
+                automationExecution: automationExecution,
+                processedAt: processedAt
+            )
             return
         }
 
@@ -212,7 +238,7 @@ private actor MedicationTriggerService {
         let previousAnchor = try anchor(from: previousAnchorData)
         let result = try await anchoredDoseEvents(after: previousAnchor)
 
-        let automations = try await AutomationStoreClient.liveValue.load()
+        let automations = try await automationStore.load()
         let selectedAutomation = automations.first(where: { $0.isEnabled && $0.trigger.medicationFrequency != nil })
         let action = MedicationTriggerPlanner.observationAction(
             state: currentState,
@@ -221,40 +247,36 @@ private actor MedicationTriggerService {
                 .filter { $0.logStatus == .taken }
                 .map(\.uuid),
             automation: selectedAutomation,
-            now: Date()
+            now: processedAt
         )
 
         switch action {
         case let .retryPending(pendingMedicationTrigger):
-            try await runPendingMedicationTrigger(pendingMedicationTrigger, runtimeStore: runtimeStore)
+            try await MedicationTriggerRuntime.runPendingMedicationTrigger(
+                pendingMedicationTrigger,
+                runtimeStore: runtimeStore,
+                automationExecution: automationExecution,
+                processedAt: processedAt
+            )
 
         case let .commitAnchor(anchorData):
             _ = try await runtimeStore.update { state in
-                state.advanceMedicationQueryAnchor(anchorData, referenceDate: Date())
+                state.advanceMedicationQueryAnchor(anchorData, referenceDate: processedAt)
             }
 
         case let .stagePending(pendingMedicationTrigger):
             _ = try await runtimeStore.update { state in
                 state.stageMedicationTrigger(pendingMedicationTrigger)
             }
-            try await runPendingMedicationTrigger(pendingMedicationTrigger, runtimeStore: runtimeStore)
+            try await MedicationTriggerRuntime.runPendingMedicationTrigger(
+                pendingMedicationTrigger,
+                runtimeStore: runtimeStore,
+                automationExecution: automationExecution,
+                processedAt: processedAt
+            )
 
         case .noAction:
             return
-        }
-    }
-
-    private func runPendingMedicationTrigger(
-        _ pendingMedicationTrigger: AutomationRuntimeState.PendingMedicationTrigger,
-        runtimeStore: AutomationRuntimeStoreClient
-    ) async throws {
-        _ = try await AutomationExecutionClient.liveValue.runAutomation(
-            pendingMedicationTrigger.automation,
-            .medicationTriggerBackgroundDelivery,
-            MedicationTriggerPlanner.detailMessage(for: pendingMedicationTrigger)
-        )
-        _ = try await runtimeStore.update { state in
-            state.commitPendingMedicationTrigger(processedAt: Date())
         }
     }
 

@@ -1,5 +1,9 @@
 import Foundation
 
+func normalizedMedicationTriggerEventIDs(_ eventIDs: [UUID]) -> [UUID] {
+    Array(Set(eventIDs)).sorted { $0.uuidString < $1.uuidString }
+}
+
 struct AutomationRuntimeState: Codable, Equatable, Sendable {
     struct ScheduledRun: Codable, Equatable, Sendable {
         var automationID: UUID
@@ -7,6 +11,7 @@ struct AutomationRuntimeState: Codable, Equatable, Sendable {
     }
 
     struct PendingMedicationTrigger: Codable, Equatable, Sendable {
+        // Snapshot the automation at observation time so retries preserve the original trigger request.
         var automation: Automation
         var queryAnchorData: Data
         var triggeringEventIDs: [UUID]
@@ -47,10 +52,11 @@ struct AutomationRuntimeState: Codable, Equatable, Sendable {
     }
 
     mutating func stageMedicationTrigger(_ pendingTrigger: PendingMedicationTrigger) {
+        // Normalize again at the persistence boundary so stored state stays deterministic.
         pendingMedicationTrigger = PendingMedicationTrigger(
             automation: pendingTrigger.automation,
             queryAnchorData: pendingTrigger.queryAnchorData,
-            triggeringEventIDs: normalizedMedicationEventIDs(pendingTrigger.triggeringEventIDs),
+            triggeringEventIDs: normalizedMedicationTriggerEventIDs(pendingTrigger.triggeringEventIDs),
             createdAt: pendingTrigger.createdAt
         )
     }
@@ -69,7 +75,7 @@ struct AutomationRuntimeState: Codable, Equatable, Sendable {
     }
 
     mutating func recordProcessedMedicationTriggerEvents(_ eventIDs: [UUID], processedAt: Date) {
-        let normalizedEventIDs = normalizedMedicationEventIDs(eventIDs)
+        let normalizedEventIDs = normalizedMedicationTriggerEventIDs(eventIDs)
         let normalizedSet = Set(normalizedEventIDs)
 
         processedMedicationTriggerEvents.removeAll { normalizedSet.contains($0.eventID) }
@@ -97,10 +103,6 @@ struct AutomationRuntimeState: Codable, Equatable, Sendable {
         if let pendingMedicationTrigger, automationIDs.contains(pendingMedicationTrigger.automation.id) {
             self.pendingMedicationTrigger = nil
         }
-    }
-
-    private func normalizedMedicationEventIDs(_ eventIDs: [UUID]) -> [UUID] {
-        Array(Set(eventIDs)).sorted { $0.uuidString < $1.uuidString }
     }
 }
 
