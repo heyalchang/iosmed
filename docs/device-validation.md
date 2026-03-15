@@ -10,7 +10,8 @@ As of 2026-03-14:
 
 - `xcodebuild` succeeds for `generic/platform=iOS` when code signing is disabled.
 - The signed `generic/platform=iOS` build fails only because the project still needs a real development team and non-placeholder identifiers.
-- Unit tests and the existing UI smoke test pass on simulator.
+- Unit tests pass on simulator, including persistence, automation execution, and App Intent coverage.
+- The existing UI smoke test passes on simulator.
 
 ## Required One-Time Project Setup
 

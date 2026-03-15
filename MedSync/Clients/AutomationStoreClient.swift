@@ -37,8 +37,12 @@ extension DependencyValues {
     }
 }
 
-private actor AutomationFileStore {
-    private let fileStore = JSONFileStore<[Automation]>(filename: "automations.json", defaultValue: [])
+actor AutomationFileStore {
+    private let fileStore: JSONFileStore<[Automation]>
+
+    init(fileStore: JSONFileStore<[Automation]> = JSONFileStore(filename: "automations.json", defaultValue: [])) {
+        self.fileStore = fileStore
+    }
 
     func load() async throws -> [Automation] {
         try await fileStore.load().sorted { $0.updatedAt > $1.updatedAt }

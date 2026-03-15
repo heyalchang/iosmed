@@ -7,95 +7,21 @@ struct AutomationExecutionClient: Sendable {
 }
 
 extension AutomationExecutionClient: DependencyKey {
-    static let liveValue = Self(
-        runManualExport: { options in
-            do {
-                let summary = try await ExportRunnerClient.liveValue.run(.manual(options))
-                try await ActivityLogStoreClient.liveValue.append(.run(summary: summary, timestamp: Date()))
-                return summary
-            } catch {
-                let now = Date()
-                let range = options.dateRange.resolved(now: now)
-                let failureSummary = ExportRunSummary(
-                    filename: "",
-                    relativePath: "",
-                    recordCount: 0,
-                    destination: .iCloudDrive,
-                    format: options.format,
-                    dateRangePreset: options.dateRange.preset,
-                    dateRange: range,
-                    triggerReason: .manualExport,
-                    automationID: nil,
-                    automationName: nil
-                )
-                try? await ActivityLogStoreClient.liveValue.append(
-                    .run(
-                        summary: failureSummary,
-                        status: .failure,
-                        errorDetails: error.localizedDescription,
-                        timestamp: now
-                    )
-                )
-                throw UserFacingError(error.localizedDescription)
-            }
-        },
-        runAutomation: { automation, triggerReason, detailMessage in
-            do {
-                let summary = try await ExportRunnerClient.liveValue.run(.automation(automation, triggerReason: triggerReason))
-                try await ActivityLogStoreClient.liveValue.append(
-                    .run(summary: summary, timestamp: Date(), message: detailMessage)
-                )
-                if automation.notifyWhenRun {
-                    await LocalNotificationClient.liveValue.sendAutomationRunNotification(
-                        AutomationNotificationPayload(
-                            automationName: automation.name,
-                            triggerReason: triggerReason,
-                            status: .success,
-                            filename: summary.filename,
-                            errorMessage: nil
-                        )
-                    )
-                }
-                return summary
-            } catch {
-                let now = Date()
-                let range = automation.exportOptions.dateRange.resolved(now: now)
-                let failureSummary = ExportRunSummary(
-                    filename: "",
-                    relativePath: "",
-                    recordCount: 0,
-                    destination: .iCloudDrive,
-                    format: automation.exportOptions.format,
-                    dateRangePreset: automation.exportOptions.dateRange.preset,
-                    dateRange: range,
+    static let liveValue: Self = {
+        let service = AutomationExecutionService()
+        return Self(
+            runManualExport: { options in
+                try await service.runManualExport(options)
+            },
+            runAutomation: { automation, triggerReason, detailMessage in
+                try await service.runAutomation(
+                    automation,
                     triggerReason: triggerReason,
-                    automationID: automation.id,
-                    automationName: automation.name
+                    detailMessage: detailMessage
                 )
-                try? await ActivityLogStoreClient.liveValue.append(
-                    .run(
-                        summary: failureSummary,
-                        status: .failure,
-                        errorDetails: error.localizedDescription,
-                        timestamp: now,
-                        message: detailMessage
-                    )
-                )
-                if automation.notifyWhenRun {
-                    await LocalNotificationClient.liveValue.sendAutomationRunNotification(
-                        AutomationNotificationPayload(
-                            automationName: automation.name,
-                            triggerReason: triggerReason,
-                            status: .failure,
-                            filename: nil,
-                            errorMessage: error.localizedDescription
-                        )
-                    )
-                }
-                throw UserFacingError(error.localizedDescription)
             }
-        }
-    )
+        )
+    }()
 
     static let testValue = Self(
         runManualExport: { options in
@@ -135,5 +61,105 @@ extension DependencyValues {
     var automationExecution: AutomationExecutionClient {
         get { self[AutomationExecutionClient.self] }
         set { self[AutomationExecutionClient.self] = newValue }
+    }
+}
+
+private actor AutomationExecutionService {
+    @Dependency(\.activityLogStore) private var activityLogStore
+    @Dependency(\.date.now) private var currentDate
+    @Dependency(\.exportRunner) private var exportRunner
+    @Dependency(\.localNotifications) private var localNotifications
+
+    func runManualExport(_ options: MedicationExportOptions) async throws -> ExportRunSummary {
+        do {
+            let summary = try await exportRunner.run(.manual(options))
+            try await activityLogStore.append(.run(summary: summary, timestamp: currentDate))
+            return summary
+        } catch {
+            let now = currentDate
+            let range = options.dateRange.resolved(now: now)
+            let failureSummary = ExportRunSummary(
+                filename: "",
+                relativePath: "",
+                recordCount: 0,
+                destination: .iCloudDrive,
+                format: options.format,
+                dateRangePreset: options.dateRange.preset,
+                dateRange: range,
+                triggerReason: .manualExport,
+                automationID: nil,
+                automationName: nil
+            )
+            try? await activityLogStore.append(
+                .run(
+                    summary: failureSummary,
+                    status: .failure,
+                    errorDetails: error.localizedDescription,
+                    timestamp: now
+                )
+            )
+            throw UserFacingError(error.localizedDescription)
+        }
+    }
+
+    func runAutomation(
+        _ automation: Automation,
+        triggerReason: TriggerReason,
+        detailMessage: String?
+    ) async throws -> ExportRunSummary {
+        do {
+            let summary = try await exportRunner.run(.automation(automation, triggerReason: triggerReason))
+            try await activityLogStore.append(
+                .run(summary: summary, timestamp: currentDate, message: detailMessage)
+            )
+            if automation.notifyWhenRun {
+                await localNotifications.sendAutomationRunNotification(
+                    AutomationNotificationPayload(
+                        automationName: automation.name,
+                        triggerReason: triggerReason,
+                        status: .success,
+                        filename: summary.filename,
+                        errorMessage: nil
+                    )
+                )
+            }
+            return summary
+        } catch {
+            let now = currentDate
+            let range = automation.exportOptions.dateRange.resolved(now: now)
+            let failureSummary = ExportRunSummary(
+                filename: "",
+                relativePath: "",
+                recordCount: 0,
+                destination: .iCloudDrive,
+                format: automation.exportOptions.format,
+                dateRangePreset: automation.exportOptions.dateRange.preset,
+                dateRange: range,
+                triggerReason: triggerReason,
+                automationID: automation.id,
+                automationName: automation.name
+            )
+            try? await activityLogStore.append(
+                .run(
+                    summary: failureSummary,
+                    status: .failure,
+                    errorDetails: error.localizedDescription,
+                    timestamp: now,
+                    message: detailMessage
+                )
+            )
+            if automation.notifyWhenRun {
+                await localNotifications.sendAutomationRunNotification(
+                    AutomationNotificationPayload(
+                        automationName: automation.name,
+                        triggerReason: triggerReason,
+                        status: .failure,
+                        filename: nil,
+                        errorMessage: error.localizedDescription
+                    )
+                )
+            }
+            throw UserFacingError(error.localizedDescription)
+        }
     }
 }

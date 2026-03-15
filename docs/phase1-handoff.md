@@ -140,14 +140,14 @@ Phase 1 is a local-only native iOS app for exporting Apple Health medication dat
 
 ### Remaining work required for a strong Phase 1 completion
 
-#### 1. Expand persistence and runtime tests
+#### 1. Simulator-friendly coverage now in place
 
-Highest-value additions:
+The branch now includes direct coverage for:
 
 - persistence tests for automations, activity logs, and runtime state
-- runtime-store migration tests for existing JSON-backed data
 - execution-client tests for success and failure logging paths
-- tests around notification intent and runtime side effects where practical
+- App Intent execution paths
+- existing reducer, planner, serializer, file-layout, and UI smoke tests
 
 #### 2. Device-only Phase 1 validation pass
 
@@ -223,11 +223,9 @@ Status: next active milestone
 
 ## Immediate TODO List
 
-1. Add persistence tests for the current JSON-backed storage layer and migration behavior.
-2. Add execution-path tests around shared logging/notification side effects where practical.
-3. Run the narrow real-device validation pass.
-4. Update placeholder signing and iCloud values when ready for device/distribution work.
-5. Decide whether pending medication triggers should always run their staged automation snapshot if the user later edits or disables that automation before retry.
+1. Run the narrow real-device validation pass.
+2. Update placeholder signing and iCloud values when ready for device/distribution work.
+3. Decide whether pending medication triggers should always run their staged automation snapshot if the user later edits or disables that automation before retry.
 
 ## Suggested Handoff Guidance For A Fresh Agent Or Engineer
 

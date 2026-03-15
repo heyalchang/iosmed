@@ -36,11 +36,17 @@ extension DependencyValues {
     }
 }
 
-private actor AutomationRuntimeFileStore {
-    private let fileStore = JSONFileStore<AutomationRuntimeState>(
-        filename: "automation-runtime-state.json",
-        defaultValue: AutomationRuntimeState()
-    )
+actor AutomationRuntimeFileStore {
+    private let fileStore: JSONFileStore<AutomationRuntimeState>
+
+    init(
+        fileStore: JSONFileStore<AutomationRuntimeState> = JSONFileStore(
+            filename: "automation-runtime-state.json",
+            defaultValue: AutomationRuntimeState()
+        )
+    ) {
+        self.fileStore = fileStore
+    }
 
     func load() async throws -> AutomationRuntimeState {
         try await fileStore.load()

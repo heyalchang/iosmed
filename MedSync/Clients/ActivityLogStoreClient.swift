@@ -37,8 +37,12 @@ extension DependencyValues {
     }
 }
 
-private actor ActivityLogFileStore {
-    private let fileStore = JSONFileStore<[ActivityLogEntry]>(filename: "activity-log.json", defaultValue: [])
+actor ActivityLogFileStore {
+    private let fileStore: JSONFileStore<[ActivityLogEntry]>
+
+    init(fileStore: JSONFileStore<[ActivityLogEntry]> = JSONFileStore(filename: "activity-log.json", defaultValue: [])) {
+        self.fileStore = fileStore
+    }
 
     func load() async throws -> [ActivityLogEntry] {
         try await fileStore.load().sorted { $0.timestamp > $1.timestamp }

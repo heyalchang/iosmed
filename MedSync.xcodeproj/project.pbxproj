@@ -19,7 +19,9 @@
 		2CAD07D074930C0BD5C8488D /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D87CA7403DE267D1F85FC9 /* SettingsView.swift */; };
 		2D61B3B2F6B6847ED57DCFAB /* ActivityLogStoreClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4E7171DDE7F0A7B5EB4755 /* ActivityLogStoreClient.swift */; };
 		305631222B720F555D3649EF /* SettingsFeatureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBBFF1AB54E4C22B107C75A8 /* SettingsFeatureTests.swift */; };
+		3F7BA693BF26E8FEB8910B5F /* AutomationExecutionClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A927663B16458AE4DA79AC /* AutomationExecutionClientTests.swift */; };
 		49975513EE62AE5374D3E172 /* UserFacingError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9087BF2AA5517D8ED2FF5AB8 /* UserFacingError.swift */; };
+		53F72B30E56BCE9CC1A2B28A /* PersistenceStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36B0E0A243CAD127D838547B /* PersistenceStoreTests.swift */; };
 		569919BE55976ED226F2A6CF /* Automation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5908D0F52A724051B6D8E764 /* Automation.swift */; };
 		579B80910F83D6839C9D8D4B /* AutomationRuntimeState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E716F95461AAABDBD29208 /* AutomationRuntimeState.swift */; };
 		5FD90717814909D08F99BCD5 /* IdentifiedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 9D098F7A0A9F014B072014D5 /* IdentifiedCollections */; };
@@ -35,6 +37,7 @@
 		8EE79098446D57BD18775C57 /* AutomationEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F654F98A9710B34331D872 /* AutomationEditorView.swift */; };
 		93435669C3C8E3C2A378A598 /* ExportFileLayoutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081BB8DF7AD57115921E2725 /* ExportFileLayoutTests.swift */; };
 		997BB44966B000323F33293F /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C07C95C6E937379FF59A3E6 /* AppView.swift */; };
+		9A38075C6907970D449A94CF /* RunAutomationIntentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C09AAAAF20DD7AE06D07118 /* RunAutomationIntentTests.swift */; };
 		9D59932E983A9D3123FED7FF /* AutomationRuntimeStateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C3CB4BFC2546288825C4F0 /* AutomationRuntimeStateTests.swift */; };
 		A1CF5F756A87E4D713E74FDE /* AutomationExecutionClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8F66965504CD3B7CB8F2A6 /* AutomationExecutionClient.swift */; };
 		A1DDD600500A688B8ED65848 /* ICloudDriveClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B4C34A30FECFFF4A1015FF /* ICloudDriveClient.swift */; };
@@ -106,7 +109,9 @@
 		2B627D04DED6D1C3439C8DA0 /* AutomationsFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutomationsFeature.swift; sourceTree = "<group>"; };
 		32C3CB4BFC2546288825C4F0 /* AutomationRuntimeStateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutomationRuntimeStateTests.swift; sourceTree = "<group>"; };
 		348854C2AFA2A6DDE91363AF /* AutomationDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutomationDetailView.swift; sourceTree = "<group>"; };
+		36B0E0A243CAD127D838547B /* PersistenceStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceStoreTests.swift; sourceTree = "<group>"; };
 		372E6AD76529B1B732D0D935 /* ActivityLogEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityLogEntry.swift; sourceTree = "<group>"; };
+		38A927663B16458AE4DA79AC /* AutomationExecutionClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutomationExecutionClientTests.swift; sourceTree = "<group>"; };
 		3F3DB474269C0192F094C3D1 /* MedSync.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MedSync.entitlements; sourceTree = "<group>"; };
 		440827B3EC2827E337C45109 /* ExportRunSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportRunSummary.swift; sourceTree = "<group>"; };
 		509057FB957C6FBB513EE910 /* ExportFileLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportFileLayout.swift; sourceTree = "<group>"; };
@@ -114,6 +119,7 @@
 		5C07C95C6E937379FF59A3E6 /* AppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
 		61E716F95461AAABDBD29208 /* AutomationRuntimeState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutomationRuntimeState.swift; sourceTree = "<group>"; };
 		63E458CD4DCB912964089F56 /* AutomationRuntimeStoreClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutomationRuntimeStoreClient.swift; sourceTree = "<group>"; };
+		6C09AAAAF20DD7AE06D07118 /* RunAutomationIntentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunAutomationIntentTests.swift; sourceTree = "<group>"; };
 		6F2A09D06A557AB91867830D /* MedicationExportSerializationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicationExportSerializationTests.swift; sourceTree = "<group>"; };
 		72A5E5C0878BA82F44FB5372 /* AutomationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutomationsView.swift; sourceTree = "<group>"; };
 		73D87CA7403DE267D1F85FC9 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -189,11 +195,22 @@
 			path = App;
 			sourceTree = "<group>";
 		};
+		120F4559192DBFC771B904BD /* Clients */ = {
+			isa = PBXGroup;
+			children = (
+				38A927663B16458AE4DA79AC /* AutomationExecutionClientTests.swift */,
+			);
+			path = Clients;
+			sourceTree = "<group>";
+		};
 		1ADFF032F57F11646B70FB49 /* MedSyncTests */ = {
 			isa = PBXGroup;
 			children = (
+				750C618456709314AA135654 /* AppIntents */,
+				120F4559192DBFC771B904BD /* Clients */,
 				78682960529AB133210D0E68 /* Domain */,
 				7D7CA627E569268503C4BCED /* Features */,
+				8A6905621BE071C8BB0B2453 /* Infrastructure */,
 			);
 			path = MedSyncTests;
 			sourceTree = "<group>";
@@ -290,6 +307,14 @@
 			path = ActivityLog;
 			sourceTree = "<group>";
 		};
+		750C618456709314AA135654 /* AppIntents */ = {
+			isa = PBXGroup;
+			children = (
+				6C09AAAAF20DD7AE06D07118 /* RunAutomationIntentTests.swift */,
+			);
+			path = AppIntents;
+			sourceTree = "<group>";
+		};
 		78682960529AB133210D0E68 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
@@ -324,6 +349,14 @@
 				CBBFF1AB54E4C22B107C75A8 /* SettingsFeatureTests.swift */,
 			);
 			path = Features;
+			sourceTree = "<group>";
+		};
+		8A6905621BE071C8BB0B2453 /* Infrastructure */ = {
+			isa = PBXGroup;
+			children = (
+				36B0E0A243CAD127D838547B /* PersistenceStoreTests.swift */,
+			);
+			path = Infrastructure;
 			sourceTree = "<group>";
 		};
 		A6C176CEDF46E22B0F402835 /* Clients */ = {
@@ -529,6 +562,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E8F61029A764860A1F4D216B /* AutomationDetailFeatureTests.swift in Sources */,
+				3F7BA693BF26E8FEB8910B5F /* AutomationExecutionClientTests.swift in Sources */,
 				9D59932E983A9D3123FED7FF /* AutomationRuntimeStateTests.swift in Sources */,
 				2C5AEB67C3541862389A571C /* AutomationSchedulePlannerTests.swift in Sources */,
 				AE0623FFB7B3043D19F5F0E1 /* AutomationSchedulerConfigurationTests.swift in Sources */,
@@ -538,6 +572,8 @@
 				E00A81E92A691589F5DEA586 /* MedicationExportSerializationTests.swift in Sources */,
 				FD267BFC9954B7CD972669E6 /* MedicationTriggerPlannerTests.swift in Sources */,
 				07EE92B045474523E1C75AE0 /* MedicationTriggerRuntimeTests.swift in Sources */,
+				53F72B30E56BCE9CC1A2B28A /* PersistenceStoreTests.swift in Sources */,
+				9A38075C6907970D449A94CF /* RunAutomationIntentTests.swift in Sources */,
 				305631222B720F555D3649EF /* SettingsFeatureTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

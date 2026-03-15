@@ -3,10 +3,12 @@ import Foundation
 actor JSONFileStore<Value: Codable & Sendable> {
     private let filename: String
     private let defaultValue: Value
+    private let directoryURL: URL?
 
-    init(filename: String, defaultValue: Value) {
+    init(filename: String, defaultValue: Value, directoryURL: URL? = nil) {
         self.filename = filename
         self.defaultValue = defaultValue
+        self.directoryURL = directoryURL
     }
 
     func load() throws -> Value {
@@ -26,13 +28,18 @@ actor JSONFileStore<Value: Codable & Sendable> {
     }
 
     private func fileURL() throws -> URL {
-        let appSupport = try FileManager.default.url(
-            for: .applicationSupportDirectory,
-            in: .userDomainMask,
-            appropriateFor: nil,
-            create: true
-        )
-        let directory = appSupport.appendingPathComponent("MedSync", isDirectory: true)
+        let directory: URL
+        if let directoryURL {
+            directory = directoryURL
+        } else {
+            let appSupport = try FileManager.default.url(
+                for: .applicationSupportDirectory,
+                in: .userDomainMask,
+                appropriateFor: nil,
+                create: true
+            )
+            directory = appSupport.appendingPathComponent("MedSync", isDirectory: true)
+        }
         try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
         return directory.appendingPathComponent(filename)
     }
