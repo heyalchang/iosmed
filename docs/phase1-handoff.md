@@ -15,9 +15,9 @@ The competitor/reference document is useful for orientation, but it is not the i
 
 ## Current Branch Snapshot
 
-- Branch: `codex/medication-trigger-runtime`
-- Current reviewed commit: `ac7f85f`
-- PR: `#1 - Finish MedSync automation runtime and shortcuts`
+- `main` already includes the merged automation-runtime work from PR `#1`
+- Current working branch for the next increment: `codex/medication-trigger-two-phase`
+- This branch adds the two-phase medication-trigger runtime and compatibility fixes for existing persisted runtime-state JSON
 - Local status note: the app and tests are working on this machine; the simulator needed to be explicitly booted before the UI smoke test would run reliably
 
 ## Phase 1 Work Product Spec
@@ -66,7 +66,7 @@ Phase 1 is a local-only native iOS app for exporting Apple Health medication dat
 - The selected automation's export settings control what gets exported when the trigger fires.
 - Locked policy decision:
   - never missing a medication-triggered export is more important than avoiding duplicates
-  - long-term runtime should use a two-phase anchor flow
+  - the runtime uses a two-phase anchor flow so committed anchors only advance after successful export execution
 
 #### Activity Log
 
@@ -112,6 +112,7 @@ Phase 1 is a local-only native iOS app for exporting Apple Health medication dat
 - Best-effort scheduled automation runtime
 - Foreground catch-up when the app becomes active
 - Medication-trigger runtime using `HKObserverQuery` plus anchored fetch
+- Two-phase medication-trigger runtime with pending-trigger persistence, committed-anchor-on-success behavior, and processed-event dedupe tracking
 - Local notifications for automation run results
 - App Intents / Shortcuts support for running an automation
 - Automation detail view with scoped history and runtime timing
@@ -119,7 +120,7 @@ Phase 1 is a local-only native iOS app for exporting Apple Health medication dat
 
 ### Validated on this machine
 
-- Unit tests passed: `16/16`
+- Unit tests passed: `19/19`
 - UI smoke test passed after explicitly booting the simulator and rerunning:
   - `MedSyncUITests/testAppLaunchShowsShellTabs`
 - Direct simulator app launch also succeeded with `simctl launch`
@@ -127,60 +128,28 @@ Phase 1 is a local-only native iOS app for exporting Apple Health medication dat
 ### Implemented but intentionally transitional
 
 - Automations, activity logs, and runtime state currently use JSON file stores behind dependency clients.
-- This is working and testable, but SwiftData is the agreed long-term persistence direction.
+- This is working and testable, and is acceptable for Phase 1.
 
 ## Locked Decisions Since The Initial Build
 
 - Medication-trigger reliability should favor not missing exports over avoiding duplicates.
-- The medication-trigger runtime should move from the current single-phase committed-anchor update to a two-phase anchor flow.
-- SwiftData is the agreed long-term persistence layer for automations, structured activity logs, and runtime state, still hidden behind dependency clients.
+- The medication-trigger runtime now uses a two-phase anchor flow with pending trigger state plus processed-event dedupe.
+- SwiftData remains an agreed long-term persistence direction, but it is explicitly deferred beyond Phase 1.
 
 ## Known Gaps / What Is Left
 
 ### Remaining work required for a strong Phase 1 completion
 
-#### 1. Implement the two-phase medication-trigger runtime
-
-Current branch behavior still advances the committed query anchor before export success.
-
-Needed outcome:
-
-- detect qualifying newly logged `.taken` events
-- persist pending trigger state
-- run the selected automation
-- commit the anchor only after success
-- retain enough dedupe information to avoid noisy duplicate exports after partial success or crash recovery
-
-This is the most important remaining correctness change because it directly affects the flagship medication-trigger feature.
-
-#### 2. Add persistence and runtime tests around the new trigger semantics
-
-Tests should cover:
-
-- export failure after event detection does not lose the trigger
-- successful retry eventually commits the anchor
-- duplicate suppression after partial success
-- cold start with pending trigger state
-
-#### 3. Migrate persistence to SwiftData behind dependency clients
-
-Scope:
-
-- automations
-- activity logs
-- automation runtime state
-
-Do not let reducers or views talk to SwiftData directly.
-
-#### 4. Expand tests around persistence and shared execution
+#### 1. Expand persistence and runtime tests
 
 Highest-value additions:
 
 - persistence tests for automations, activity logs, and runtime state
+- runtime-store migration tests for existing JSON-backed data
 - execution-client tests for success and failure logging paths
 - tests around notification intent and runtime side effects where practical
 
-#### 5. Device-only Phase 1 validation pass
+#### 2. Device-only Phase 1 validation pass
 
 Narrow device validation still needed for:
 
@@ -192,7 +161,7 @@ Narrow device validation still needed for:
 - local notifications
 - Shortcuts/App Intents from the system UI
 
-#### 6. Final signing/iCloud wiring when ready
+#### 3. Final signing/iCloud wiring when ready
 
 By design, Phase 1 did not block on real team IDs or production iCloud identifiers.
 
@@ -207,7 +176,8 @@ Before broader device validation or distribution, replace the placeholder values
 
 - clean up direct `.liveValue` usage in runtime entry points and service actors
 - polish minor notification-copy/UI nits
-- improve query efficiency for scoped history once persistence moves to SwiftData
+- improve query efficiency for scoped history if JSON-backed persistence becomes limiting in real use
+- decide whether pending medication triggers should always run their staged automation snapshot if the user later edits or disables that automation before retry
 
 ## Recommended Milestone Plan From Here
 
@@ -223,32 +193,27 @@ Status: complete
 
 ### Milestone 2: Automation runtime
 
-Status: mostly complete
+Status: complete on the current branch
 
 - automation CRUD
 - structured logs
 - scheduled automation runtime
 - medication-trigger runtime
+- two-phase medication-trigger durability
 - notifications
 - Shortcuts/App Intents
 - scoped automation history
 
-Remaining within this milestone:
-
-- switch medication-trigger runtime to the two-phase anchor model
-- add tests for the new retry/dedupe semantics
-
 ### Milestone 3: Persistence convergence
 
-Status: not started
+Status: deferred beyond Phase 1
 
-- migrate JSON-backed persistence to SwiftData-backed dependency clients
-- preserve testability and structured-query behavior
-- add persistence tests
+- keep JSON-backed dependency clients unless real usage proves them insufficient
+- revisit SwiftData in a later phase if richer queries, retention controls, or migration needs justify the complexity
 
 ### Milestone 4: Device readiness
 
-Status: partially started, not complete
+Status: next active milestone
 
 - use real signing/iCloud identifiers when needed
 - validate on physical device
@@ -256,13 +221,11 @@ Status: partially started, not complete
 
 ## Immediate TODO List
 
-1. Replace current medication-trigger anchor flow with a two-phase pending/committed model.
-2. Add tests proving trigger events are not lost on export failure.
-3. Decide the exact persisted shape for dedupe data in runtime state.
-4. Migrate automations, activity logs, and runtime state to SwiftData behind dependency clients.
-5. Add persistence tests for the new storage layer.
-6. Run the narrow real-device validation pass.
-7. Update placeholder signing and iCloud values when ready for device/distribution work.
+1. Add persistence tests for the current JSON-backed storage layer and migration behavior.
+2. Add execution-path tests around shared logging/notification side effects where practical.
+3. Run the narrow real-device validation pass.
+4. Update placeholder signing and iCloud values when ready for device/distribution work.
+5. Decide whether pending medication triggers should always run their staged automation snapshot if the user later edits or disables that automation before retry.
 
 ## Suggested Handoff Guidance For A Fresh Agent Or Engineer
 
@@ -273,9 +236,9 @@ Tell the next person:
 - use `docs/healthautoexport-spec.md` only as orientation/reference
 - treat `docs/policy-decisions.md` as locked decisions
 - do not broaden scope beyond medications + iCloud Drive
-- prioritize medication-trigger correctness before polish
+- prioritize device validation before persistence rewrites or polish
 - keep all Apple framework and persistence access behind dependency clients
 
 ## Recommended First Task For The Next Session
 
-Implement the two-phase medication-trigger runtime and the tests that prove a failed export does not lose the triggering medication event.
+Get the app onto a physical device, validate the real HealthKit/iCloud/background-delivery path, and fix the concrete issues that show up there before considering a persistence rewrite.
