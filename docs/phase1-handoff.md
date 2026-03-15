@@ -10,6 +10,7 @@ Hand this off together with:
 - `docs/healthautoexport-spec.md` as competitor/reference context only
 - `docs/policy-decisions.md` for decisions that were locked after implementation started
 - `docs/future-features.md` for agreed long-term directions
+- `docs/competitor-parity-roadmap.md` for post-Phase-1 sizing against the broader competitor surface
 
 The competitor/reference document is useful for orientation, but it is not the implementation contract. Phase 1 is defined by `AGENTS.md` plus the decisions captured in the repo docs.
 
